@@ -1,0 +1,24 @@
+
+Add settings display to population view
+
+Add reset population button to settings display on population view
+
+Add save settings button to settings display on population view
+
+Add local storage sync to pop. settings model.
+
+Allow creator to specify chromosome bases
+
+Allow creator to specify the size of the chromosome
+
+Allow mutiple chromosomes ( with different lengths and bases )
+
+Allow the user to fetch the settings model from local storage in the creator
+
+Create and keep a log of population activity
+
+Allow the user to view the log of population activity related to a specific organism
+
+Support visualization of chromosomes with non-flat structure
+
+Support multiple species (Organism.type) in the population.

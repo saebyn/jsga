@@ -1,5 +1,6 @@
 // -*- coding: utf-8 -*-
 // vim:ff=unix:nowrap:tabstop=4:shiftwidth=4:softtabstop=4:smarttab:shiftround:expandtab
+// TODO add tests for elitism
 
 describe('The Population collection', function () {
     beforeEach(function () {
@@ -20,6 +21,17 @@ describe('The Population collection', function () {
     });
 
     describe('when breeding organisms', function () {
+        it('should not call the selector with an elitism of 100%', function () {
+            var chooseSpy = sinon.spy(this.selector, 'choose');
+
+            this.populationSettings.set({elitism: 100.0});
+            this.population.seed(this.populationSettings);
+
+            this.population.run();
+
+            expect(chooseSpy).not.toHaveBeenCalled();
+        });
+
         it('should call the selector', function () {
             var chooseSpy = sinon.spy(this.selector, 'choose');
 
@@ -27,7 +39,7 @@ describe('The Population collection', function () {
 
             this.population.run();
 
-            expect(chooseSpy.calledOnce).toBeTruthy();
+            expect(chooseSpy).toHaveBeenCalled();
         });
 
         it('should give the selector a collection of available organisms', function () {

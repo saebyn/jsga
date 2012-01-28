@@ -80,10 +80,11 @@ jsGA.Population = Backbone.Collection.extend({
     },
 
     step: function () {
-        var newOrganismsNeeded = this.length;
-        var newOrganisms = [];
+        var newOrganisms = this.topProportion(this.settings.get('elitism') / 100.0);
+        var newOrganismsNeeded = this.length - newOrganisms.length;
+        console.log(newOrganisms);
+        console.log('Kept', newOrganisms.length, 'existing organisms');
 
-        // 
         while ( newOrganismsNeeded > 0 ) {
             var choices = this.selector.choose(this);
             if ( choices === false )
@@ -91,19 +92,24 @@ jsGA.Population = Backbone.Collection.extend({
 
             // Perform the crossover operation.
             var children = choices[0].crossover(choices[1]);
+            children[0].mutate();
+            children[1].mutate();
             // Append the children to the array of new organisms.
             newOrganisms.push.apply(newOrganisms, children);
             // Now we need two less organisms that we did before.
             newOrganismsNeeded -= 2;
         }
 
-        // Do in-place mutation of children
-        _.each(newOrganisms, function (organism) { organism.mutate(); });
         this.reset(newOrganisms);
     },
 
     totalFitness: function () {
         return this.reduce(function(memo, organism){ return memo + organism.fitness(); }, 0.0);
+    },
+
+    topProportion: function (proportion) {
+        var total = Math.floor(this.length * proportion);
+        return this.first(total);
     }
 });
 

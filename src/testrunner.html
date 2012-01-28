@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jasmine Spec Runner: jsGA</title>
+
+  <link rel="shortcut icon" type="image/png" href="jasmine/images/jasmine_favicon.png">
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+
+  <link href="jasmine/jasmine.css" rel="stylesheet">
+  <script type="text/javascript" src="jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="jasmine/jasmine-html.js"></script>
+
+  <!-- include source lib files here... -->
+  <script type="text/javascript" src="lib/jasmine-jquery.js"></script>
+  <script type="text/javascript" src="lib/jasmine-sinon.js"></script>
+  <script type="text/javascript" src="lib/jquery.js"></script>
+  <script type="text/javascript" src="lib/underscore.js"></script>
+  <script type="text/javascript" src="lib/json2.js"></script>
+  <script type="text/javascript" src="lib/backbone.js"></script>
+  <script type="text/javascript" src="lib/sinon.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="src/ChromosomeVisualization.js"></script>
+  <script type="text/javascript" src="src/Population.js"></script>
+  <script type="text/javascript" src="src/Organism.js"></script>
+  <script type="text/javascript" src="src/FitnessProportionateSelector.js"></script>
+  <script type="text/javascript" src="src/AppRouter.js"></script>
+  <script type="text/javascript" src="src/PopulationView.js"></script>
+  <script type="text/javascript" src="src/PopulationSettings.js"></script>
+  <script type="text/javascript" src="src/CreatePopulationView.js"></script>
+  <script type="text/javascript" src="src/OrganismView.js"></script>
+  <script type="text/javascript" src="src/OrganismSimpleView.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="spec/PopulationSpec.js"></script>
+  <script type="text/javascript" src="spec/OrganismSpec.js"></script>
+  <script type="text/javascript" src="spec/FitnessProportionateSelectorSpec.js"></script>
+  <script type="text/javascript" src="spec/AppRouterSpec.js"></script>
+  <script type="text/javascript" src="spec/PopulationViewSpec.js"></script>
+  <script type="text/javascript" src="spec/PopulationSettingsSpec.js"></script>
+  <script type="text/javascript" src="spec/CreatePopulationViewSpec.js"></script>
+  <script type="text/javascript" src="spec/OrganismViewSpec.js"></script>
+  <script type="text/javascript" src="spec/OrganismSimpleViewSpec.js"></script>
+  <script type="text/javascript" src="spec/ChromosomeVisualizationSpec.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $.get('/templates.html').done(function (content) {
+        $('body').append(content);
+
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+
+        var htmlReporter = new jasmine.TrivialReporter();
+
+        jasmineEnv.addReporter(htmlReporter);
+
+        jasmineEnv.execute();
+      });
+    });
+  </script>
+</head>
+
+<body>
+</body>
+</html>

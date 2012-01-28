@@ -1,0 +1,32 @@
+/* -*- coding: utf-8 -*-
+ * vim:ff=unix:nowrap:tabstop=2:shiftwidth=2:softtabstop=2:smarttab:shiftround:expandtab
+ */
+body {
+  padding-top: 40px;
+}
+
+#container {
+  margin-top: 15px;
+}
+
+ol.organisms {
+  padding: 0px;
+  margin: 0px 0px 5px 0px;
+}
+
+li.organism.simple {
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  padding: 4px;
+  margin: 4px;
+  border: 1px solid black;
+}
+
+.actions label {
+  float: none;
+}
+
+input[type="number"] {
+  text-align: right;
+}

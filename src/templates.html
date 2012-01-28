@@ -1,0 +1,94 @@
+<!-- -*- coding: utf-8 -*-
+  vim:ff=unix:nowrap:tabstop=2:shiftwidth=2:softtabstop=2:smarttab:shiftround:expandtab
+   -->
+<script type="text/template" id="population-view-template">
+  <h1>Current Generation</h1>
+  <ol class="organisms"></ol>
+  <div class="alert-message block-message info">
+    Click an organism icon above to view its details.
+  </div>
+  <form>
+    <div class="actions">
+      <input type="button" class="step btn primary" value="Step">
+      <input type="button" class="run btn" value="Run for ...">
+      <label><input type="number" class="steps span2" placeholder="10" value="10"><span>steps</span></label>
+      <input type="button" class="stop btn danger" value="Stop">
+    </div>
+  </form>
+</script>
+
+<script type="text/template" id="population-create-template">
+  <h1>Create New Population</h1>
+  <form>
+    <div class="clearfix">
+      <label for="population-size">Starting Population</label>
+      <div class="input">
+        <input type="number" id="population-size" name="population-size" class="size span2" placeholder="20" value="20" min="2" max="250" step="1.0">
+        <span class="help-block">How many organisms should be seeded into the first generation?</span>
+      </div>
+    </div>
+
+    <div class="clearfix">
+      <label for="fitness-function">Fitness Function</label>
+      <div class="input">
+        <textarea id="fitness-function" name="fitness-function" rows="8" class="xxlarge"></textarea>
+        <span class="help-block">This should be a Javascript code block that returns the calculated fitness for a given organism.</span>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>Selection</legend>
+      <div class="clearfix">
+        <label for="selection-mechanism">Mechanism</label>
+        <div class="input">
+          <select name="selection-mechanism" id="selection-mechanism" class="span3">
+            <option value="fp">Fitness Proportionate</option>
+            <option value="sus">Stochastic Universal Sampling</value>
+          </select>
+          <span class="help-block">What mechanism should be used to select organisms to reproduce?</span>
+        </div>
+      </div>
+      <div class="clearfix">
+        <label for="selection-elitism">Elitism</label>
+        <div class="input">
+          <div class="input-prepend">
+            <label class="add-on">
+              <input type="checkbox" id="selection-elitism-enabled" name="selection-elitism-enabled">
+            </label>
+            <input type="number" class="mini" name="selection-elitism" id="selection-elitism" min="0" max="100" step="0.1" placeholder="10.0" value="10.0" disabled>%
+          </div>
+          <span class="help-block">What percentage of the most fit organisms in each generation should be directly cloned into the next generation?</span>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Crossover</legend>
+      <div class="clearfix">
+        <label for="crossover-probability">Probability</label>
+        <div class="input">
+          <input type="number" name="crossover-probabilty" id="crossover-probabilty" min="0" max="100" step="0.1" placeholder="70.0" value="70.0">%
+          <span class="help-block">For each pair of organisms selected to reproduce, what is the probability that a crossover will occur?</span>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Mutation</legend>
+      <div class="clearfix">
+        <label for="mutation-probability">Probability</label>
+        <div class="input">
+          <input type="number" name="mutation-probabilty" id="mutation-probabilty" min="0" max="100" step="0.01" placeholder="0.1" value="0.1">%
+          <span class="help-block">For each base in a new organism's chromosome, what is the probability that a mutation to a different base will occur?</span>
+        </div>
+      </div>
+    </fieldset>
+    <div class="actions">
+      <input type="button" class="create btn primary" value="Create">
+    </div>
+  </form>
+</script>
+
+<script type="text/template" id="organism-template">
+  <h2>Organism <%= model.cid %></h2>
+  <div class="vis"></div>
+  Fitness: <%= model.fitness() %>
+</script>

@@ -1,0 +1,91 @@
+<!-- -*- coding: utf-8 -*-
+     vim:ff=unix:nowrap:tabstop=2:shiftwidth=2:softtabstop=2:smarttab:shiftround:expandtab
+-->
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>jsGA :: GA Demo in Javascript</title>
+  <meta name="description" content="Genetic Algorithm Demo in Javascript">
+  <meta name="author" content="John Weaver">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="lib/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+  <div class="topbar-wrapper" style="z-index: 5;">
+    <div class="topbar" data-dropdown="dropdown">
+      <div class="topbar-inner">
+        <div class="container">
+          <h3><a href="#">jsGA</a></h3>
+          <ul class="nav">
+            <li><a href="#">Current Generation</a></li>
+            <li><a href="#create">Create New Population</a></li>
+          </ul>
+        </div>
+      </div><!-- /topbar-inner -->
+    </div><!-- /topbar -->
+  </div>
+  <div id="container" class="container">
+    <header>
+
+    </header>
+    <div id="content" class="row">
+      <div id="main" role="main" class="content span-two-thirds">
+
+      </div>
+      <div id="side" role="complementary" class="sidebar span-one-third">
+      </div>
+    </div>
+    <footer>
+     <span>Copyright &copy; 2012 John Weaver. All Rights Reserved</span>
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="lib/jquery.js"><\/script>')</script>
+  <script defer src="lib/underscore.js"></script>
+  <script defer src="lib/json2.js"></script>
+  <script defer src="lib/backbone.js"></script>
+
+  <!-- scripts concatenated and minified via ant build script-->
+  <script defer type="text/javascript" src="src/ChromosomeVisualization.js"></script>
+  
+  <script defer type="text/javascript" src="src/Population.js"></script>
+  <script defer type="text/javascript" src="src/Organism.js"></script>
+  <script defer type="text/javascript" src="src/FitnessProportionateSelector.js"></script>
+  <script defer type="text/javascript" src="src/AppRouter.js"></script>
+  <script defer type="text/javascript" src="src/PopulationView.js"></script>
+  <script defer type="text/javascript" src="src/PopulationSettings.js"></script>
+  <script defer type="text/javascript" src="src/CreatePopulationView.js"></script>
+  <script defer type="text/javascript" src="src/OrganismView.js"></script>
+  <script defer type="text/javascript" src="src/OrganismSimpleView.js"></script>
+  <script defer type="text/javascript" src="src/Init.js"></script>
+  <!-- end scripts-->
+<!--
+  <script> // Change UA-XXXXX-X to be your site's ID
+    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>-->
+
+
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+  
+</body>
+</html>

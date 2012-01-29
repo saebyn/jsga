@@ -9,21 +9,15 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <link rel="shortcut icon" type="image/png" href="favicon.png">
-
-  <title>jsGA :: GA Demo in Javascript</title>
-  <meta name="description" content="Genetic Algorithm Demo in Javascript">
   <meta name="author" content="John Weaver">
-
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-
-  <script src="js/lib/modernizr-2.0.6.min.js"></script>
+  <%= stylesheet_link_tag "bootstrap.min.css" %>
+  <%= stylesheet_link_tag "site.css" %>
+  <%= yield_content :head %>
 </head>
-
-<body>
+  
+<body class="<%= page_classes %>">
   <div class="topbar-wrapper" style="z-index: 5;">
     <div class="topbar" data-dropdown="dropdown">
       <div class="topbar-inner">
@@ -43,7 +37,7 @@
     </header>
     <div id="content" class="row">
       <div id="main" role="main" class="content span-two-thirds">
-
+        <%= yield %>
       </div>
       <div id="side" role="complementary" class="sidebar span-one-third">
       </div>
@@ -52,31 +46,9 @@
      <span>Copyright &copy; 2012 John Weaver. All Rights Reserved</span>
     </footer>
   </div> <!--! end of #container -->
-
-
+    
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/lib/jquery.js"><\/script>')</script>
-  <script defer src="js/lib/underscore.js"></script>
-  <script defer src="js/lib/json2.js"></script>
-  <script defer src="js/lib/backbone.js"></script>
-  <script defer type="text/javascript" src="js/lib/bootstrap-modal.js"></script>
-
-  <!-- scripts concatenated and minified via ant build script-->
-  <script defer type="text/javascript" src="js/ChromosomeVisualization.js"></script>
-  
-  <script defer type="text/javascript" src="js/Population.js"></script>
-  <script defer type="text/javascript" src="js/Organism.js"></script>
-  <script defer type="text/javascript" src="js/FitnessProportionateSelector.js"></script>
-  <script defer type="text/javascript" src="js/TournamentSelector.js"></script>
-  <script defer type="text/javascript" src="js/AppRouter.js"></script>
-  <script defer type="text/javascript" src="js/PopulationView.js"></script>
-  <script defer type="text/javascript" src="js/PopulationSettings.js"></script>
-  <script defer type="text/javascript" src="js/CreatePopulationView.js"></script>
-  <script defer type="text/javascript" src="js/OrganismView.js"></script>
-  <script defer type="text/javascript" src="js/OrganismSimpleView.js"></script>
-  <script defer type="text/javascript" src="js/Init.js"></script>
-  <script defer type="text/javascript" src="js/PopulationSettingsView.js"></script>
-  <!-- end scripts-->
+  <script>window.jQuery || document.write('<script src="/javascripts/lib/jquery.js"><\/script>')</script>
 <!--
   <script> // Change UA-XXXXX-X to be your site's ID
     window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
@@ -90,6 +62,5 @@
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
-  
 </body>
 </html>

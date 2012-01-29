@@ -1,0 +1,24 @@
+<% content_for :head do %>
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <meta name="description" content="Genetic Algorithm Demo in Javascript">
+  <title>jsGA :: GA Demo in Javascript</title>
+
+  <%= javascript_include_tag(['lib/underscore',
+                             'lib/json2',
+                             'lib/backbone',
+                             'lib/bootstrap-modal'], :defer => 'defer') %>
+
+  <%= javascript_include_tag(['ChromosomeVisualization',
+                             'Population',
+                             'Organism',
+                             'FitnessProportionateSelector',
+                             'TournamentSelector',
+                             'AppRouter',
+                             'PopulationView',
+                             'PopulationSettings',
+                             'CreatePopulationView',
+                             'OrganismView', 
+                             'OrganismSimpleView',
+                             'PopulationSettingsView',
+                             'Init'], :defer => 'defer') %>
+<% end %>

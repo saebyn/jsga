@@ -1,0 +1,64 @@
+<% content_for :head do %>
+  <link rel="shortcut icon" type="image/png" href="/javascripts/lib/jasmine/images/jasmine_favicon.png">
+  <meta name="description" content="Genetic Algorithm Demo in Javascript">
+  <title>Jasmine Spec Runner: jsGA</title>
+  <%= javascript_include_tag(['lib/underscore',
+                             'lib/json2',
+                             'lib/backbone',
+                             'lib/bootstrap-modal'], :defer => 'defer') %>
+
+  <link href="/javascripts/lib/jasmine/jasmine.css" rel="stylesheet">
+  <script type="text/javascript" src="/javascripts/lib/jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="/javascripts/lib/jasmine/jasmine-html.js"></script>
+  <script type="text/javascript" src="/javascripts/lib/jasmine-jquery.js"></script>
+  <script type="text/javascript" src="/javascripts/lib/jasmine-sinon.js"></script>
+  <script type="text/javascript" src="/javascripts/lib/jquery.js"></script>
+  <script type="text/javascript" src="/javascripts/lib/sinon.js"></script>
+
+  <%= javascript_include_tag(['ChromosomeVisualization',
+                             'Population',
+                             'Organism',
+                             'FitnessProportionateSelector',
+                             'TournamentSelector',
+                             'AppRouter',
+                             'PopulationView',
+                             'PopulationSettings',
+                             'CreatePopulationView',
+                             'OrganismView', 
+                             'OrganismSimpleView',
+                             'PopulationSettingsView',
+                             'Init'], :defer => 'defer') %>
+
+  <script type="text/javascript" src="/spec/PopulationSpec.js"></script>
+  <script type="text/javascript" src="/spec/OrganismSpec.js"></script>
+  <script type="text/javascript" src="/spec/FitnessProportionateSelectorSpec.js"></script>
+  <script type="text/javascript" src="/spec/TournamentSelectorSpec.js"></script>
+  <script type="text/javascript" src="/spec/AppRouterSpec.js"></script>
+  <script type="text/javascript" src="/spec/PopulationViewSpec.js"></script>
+  <script type="text/javascript" src="/spec/PopulationSettingsSpec.js"></script>
+  <script type="text/javascript" src="/spec/CreatePopulationViewSpec.js"></script>
+  <script type="text/javascript" src="/spec/OrganismViewSpec.js"></script>
+  <script type="text/javascript" src="/spec/OrganismSimpleViewSpec.js"></script>
+  <script type="text/javascript" src="/spec/ChromosomeVisualizationSpec.js"></script>
+  <script type="text/javascript" src="/spec/PopulationSettingsViewSpec.js"></script>
+
+  <script defer type="text/javascript">
+    $(document).ready(function() {
+      $.get('/templates.html').done(function (content) {
+        $('body').append(content);
+
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+
+        var htmlReporter = new jasmine.TrivialReporter();
+
+        jasmineEnv.addReporter(htmlReporter);
+
+        jasmineEnv.execute();
+
+        var report = $('.jasmine_reporter').remove();
+        $('#content').html(report);
+      });
+    });
+  </script>
+<% end %>

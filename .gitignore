@@ -2,4 +2,4 @@
 *.bak
 *.swp
 build/
-config/amazon.yml
+.sass-cache

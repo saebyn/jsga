@@ -10,6 +10,10 @@ describe('The PopulationSettings model', function () {
         expect(this.model.validate({size: 1})).not.toBeUndefined();
     });
 
+    it('should require that the tournament size be no larger than the population', function () {
+        expect(this.model.validate({tournamentSize: 21})).not.toBeUndefined();
+    });
+
     it('should require a percentage for elitism', function () {
         expect(this.model.validate({elitism: -1})).not.toBeUndefined();
         expect(this.model.validate({elitism: 100.1})).not.toBeUndefined();

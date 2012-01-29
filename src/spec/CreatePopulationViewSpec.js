@@ -24,7 +24,7 @@ describe('Create population view', function () {
         beforeEach(function () {
             window.router = {navigate: function () {}};
             this.routerSpy = sinon.spy(window.router, 'navigate');
-            this.view.collection.seed = function () {};
+            this.view.collection.seed = function (settings) {};
             this.populationCreateStub = sinon.stub(this.view.collection,
                                                    'seed');
             this.view.render();
@@ -77,20 +77,18 @@ describe('Create population view', function () {
             expect(this.view.$('#selection-elitism').val()).toEqual('0');
         });
 
-        it('should show the tournament size input when the tournament selection mechanism is selected', function () {
-            // TODO
-        });
-
         it('should include the tournament size option in the settings when the tournament selection mechanism is selected', function () {
-            // TODO
-        });
-
-        it('should hide the tournament size input when the tournament selection mechanism is not selected', function () {
-            // TODO
+            this.view.$('#selection-mechanism').val('tournament').change();
+            this.view.$('#tournament-size').val('4').change();
+            this.view.$('.create').trigger('click');
+            expect(this.populationCreateStub.getCall(0).args[0].get('tournamentSize')).toEqual(4);
         });
 
         it('should not include the tournament size option in the settings when the tournament selection mechanism is not selected', function () {
-            // TODO
+            this.view.$('#tournament-size').val('4').change();
+            this.view.$('#selection-mechanism').val('fp').change();
+            this.view.$('.create').trigger('click');
+            expect(this.populationCreateStub.getCall(0).args[0].has('tournamentSize')).toBeFalsy();
         });
     });
 });

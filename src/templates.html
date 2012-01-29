@@ -48,6 +48,13 @@
           <span class="help-block">What mechanism should be used to select organisms to reproduce?</span>
         </div>
       </div>
+      <div class="clearfix optional">
+        <label for="tournament-size">Tournament Size</label>
+        <div class="input">
+          <input type="number" name="tournament-size" id="tournament-size" min="1" step="1" placeholder="10" value="10">
+          <span class="help-block">What number of organisms should be randomly chosen for each tournament?</span>
+        </div>
+      </div>
       <div class="clearfix">
         <label for="selection-elitism">Elitism</label>
         <div class="input">
@@ -109,6 +116,12 @@
         <th scope="row">Selection Mechanism</th>
         <td<% if ( settings.isDefault('selectionMechanism') ) { %> class="default"<% } %>><%= settings.escape('selectionMechanism') %></td>
       </tr>
+      <% if ( settings.has('tournamentSize') ) { %>
+      <tr id="tournamentSize">
+        <th scope="row">Tournament Size</th>
+        <td><%= settings.escape('tournamentSize') %></td>
+      </tr>
+      <% } %>
       <tr id="elitism">
         <th scope="row">Elitism</th>
         <td<% if ( settings.isDefault('elitism') ) { %> class="default"<% } %>><% if ( settings.get('elitism') > 0 ) { %><%= settings.escape('elitism') %>%<% } else {%>Off<% } %></td>

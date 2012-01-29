@@ -30,3 +30,7 @@ li.organism.simple {
 input[type="number"] {
   text-align: right;
 }
+
+form .optional {
+  display: none;
+}

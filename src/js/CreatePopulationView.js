@@ -8,14 +8,15 @@ jsGA = this.jsGA = this.jsGA || {};
 jsGA.CreatePopulationView = Backbone.View.extend({
     events: {
         'click .create': 'create',
-        'change #selection-elitism-enabled': 'toggleElitism'
+        'change #selection-elitism-enabled': 'toggleElitism',
+        'change #selection-mechanism': 'updateMechanismOptions'
     },
     tagName: 'div',
     className: 'creator',
 
     initialize: function (options) {
         options = options || {};
-        _.bindAll(this, 'create', 'toggleElitism');
+        _.bindAll(this, 'create', 'toggleElitism', 'updateMechanismOptions');
         this.model = this.model || new jsGA.PopulationSettings;
         this.template = _.template(options.template || $('#population-create-template').html());
     },
@@ -60,6 +61,8 @@ jsGA.CreatePopulationView = Backbone.View.extend({
         this.bindFormField('#population-size', 'change', 'size',
                            function (a) { return parseInt(a, 10); });
         this.bindFormField('#selection-mechanism', 'change', 'selectionMechanism');
+        this.bindFormField('#tournament-size', 'change', 'tournamentSize',
+                           function (a) { return parseInt(a, 10); });
         this.bindFormField('#selection-elitism', 'change', 'elitism',
                            function (a) { return parseFloat(a); });
         this.bindFormField('#crossover-probability', 'change', 'crossoverProbability',
@@ -68,6 +71,19 @@ jsGA.CreatePopulationView = Backbone.View.extend({
                            function (a) { return parseFloat(a); });
         this.bindFormField('#fitness-function', 'change', 'fitness');
         return this;
+    },
+
+    updateMechanismOptions: function () {
+        // hide everything first
+        $('.optional').hide();
+
+        // unset all optional settings
+        this.model.unset('tournamentSize');
+
+        if ( $('#selection-mechanism').val() === 'tournament' ) {
+            // cause the model to update and show the field
+            $('#tournament-size').change().parents('.optional').show();
+        }
     },
 
     toggleElitism: function () {

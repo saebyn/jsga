@@ -66,7 +66,13 @@ jsGA.PopulationSettings = Backbone.Model.extend({
         if ( 'selectionMechanism' in attrs ) {
             var validMechanisms = {fp: true, tournament: true};
             if ( !(attrs.selectionMechanism in validMechanisms) ) {
-                return 'The selectedd selection mechanism is not supported';
+                return 'Selection mechanism is not supported';
+            }
+        }
+
+        if ( 'tournamentSize' in attrs ) {
+            if ( attrs.tournamentSize > this.get('size') ) {
+                return 'Tournament size must be smaller than the population size';
             }
         }
 
@@ -78,13 +84,13 @@ jsGA.PopulationSettings = Backbone.Model.extend({
 
         if ( 'fitness' in attrs ) {
             if ( typeof attrs.fitness !== 'string' ) {
-                return 'The fitness function must be a string';
+                return 'Fitness function must be a string';
             }
         }
 
         if ( 'chromosomeLength' in attrs ) {
            if ( attrs.chromosomeLength <= 0 ) {
-               return 'The chromosome must have at least one base';
+               return 'Chromosome must have at least one base';
            }
         }
     }

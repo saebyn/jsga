@@ -1,10 +1,6 @@
 
 Now:
 
-Show any additional options when the selection mechanism changes.
-
-Add tournament size option.
-
 Implement tournament selection.
 
 Allow creator to specify the size of the chromosome

@@ -6,10 +6,20 @@ describe('The Population collection', function () {
     beforeEach(function () {
         this.selector = {choose: function (collection) {return false;}};
         this.population = new jsGA.Population([], {model: jsGA.Organism, selector: this.selector});
-        this.populationSettings = new jsGA.PopulationSettings;
+        this.populationSettings = new jsGA.PopulationSettings({selectionMechaism: 'fp'});
     });
 
     describe('when seeding an initial generation', function () {
+        beforeEach(function () {
+            this.fpSelectorSpy = sinon.spy(jsGA, 'FitnessProportionateSelector');
+            this.tSelectorSpy = sinon.spy(jsGA, 'TournamentSelector');
+        });
+
+        afterEach(function () {
+            this.fpSelectorSpy.restore();
+            this.tSelectorSpy.restore();
+        });
+
         it('should create a model for each organism', function () {
             var eventSpy = sinon.spy();
             this.population.bind('add', eventSpy);
@@ -17,6 +27,29 @@ describe('The Population collection', function () {
             this.population.seed(this.populationSettings);
             
             expect(eventSpy.callCount).toEqual(20);
+        });
+
+        it('should not create the selector specified in the settings if one is provided', function () {
+            this.population.seed(this.populationSettings);
+
+            expect(this.fpSelectorSpy).not.toHaveBeenCalled();
+        });
+
+        it('should create a FitnessProportionateSelector if fp is chosen', function () {
+            this.population.options.selector = false;
+            this.population.seed(this.populationSettings);
+
+            expect(this.fpSelectorSpy).toHaveBeenCalledOnce();
+            expect(this.fpSelectorSpy).toHaveBeenCalledWithExactly();
+        });
+
+        it('should create a TournamentSelector if tournament is chosen', function () {
+            this.population.options.selector = false;
+            this.populationSettings.set({selectionMechanism: 'tournament', tournamentSize: 5});
+            this.population.seed(this.populationSettings);
+
+            expect(this.tSelectorSpy).toHaveBeenCalledOnce();
+            expect(this.tSelectorSpy).toHaveBeenCalledWithExactly(5);
         });
     });
 

@@ -23,7 +23,7 @@ class jsGA.FitnessProportionateSelector
 
             # Iterate through all organisms in the population,
             # accumulating their fitness, until a selection is made.
-            for j in [0..population.length]
+            for j in [0...population.length]
                 organism = population.at(j)
                 fitness = organism.fitness()
 

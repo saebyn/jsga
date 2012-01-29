@@ -29,6 +29,8 @@ jsGA.PopulationView = Backbone.View.extend({
         $('.topbar .nav a[href="#"]').parents('li').addClass('active');
         $(this.el).html(this.template());
         this.renderOrganisms();
+        var settingsView = new jsGA.PopulationSettingsView({model: this.collection.settings});
+        $(this.el).append(settingsView.render().el);
         return this;
     },
 

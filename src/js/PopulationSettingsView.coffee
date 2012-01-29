@@ -5,5 +5,5 @@ jsGA = this.jsGA = this.jsGA || {}
 
 jsGA.PopulationSettingsView = Backbone.View.extend(
     tagName: 'div'
-
+    className: 'settings'
 )

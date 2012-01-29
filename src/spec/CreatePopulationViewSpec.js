@@ -16,7 +16,7 @@ describe('Create population view', function () {
         expect($(this.view.el)).toHaveClass('creator');
     });
 
-    it("should return the view object", function() {
+    it('should have a render that returns the view object', function() {
         expect(this.view.render()).toEqual(this.view);
     });
 

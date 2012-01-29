@@ -10,6 +10,7 @@ jsGA.Population = Backbone.Collection.extend({
         options = options || {};
         
         this.selector = options.selector || new jsGA.FitnessProportionateSelector;
+        this.settings = new jsGA.PopulationSettings;
         this.model = options.model || jsGA.Organism;
     },
 
@@ -30,16 +31,13 @@ jsGA.Population = Backbone.Collection.extend({
      */
     seed: function(settings) {
         // Keep the settings model around for later use.
-        this.settings = settings;
+        this.settings.set(settings.toJSON());
 
         // Define the default options for population seeding.
         var defaultOptions = {size: 2};
         var options = {};
 
-        // If `settings` was not provided, use an empty object.
-        if ( settings ) {
-            options = settings.toJSON();
-        }
+        options = settings.toJSON();
 
         // Override the default options with any that were passed in.
         options = _.extend(defaultOptions, options);
@@ -82,8 +80,6 @@ jsGA.Population = Backbone.Collection.extend({
     step: function () {
         var newOrganisms = this.topProportion(this.settings.get('elitism') / 100.0);
         var newOrganismsNeeded = this.length - newOrganisms.length;
-        console.log(newOrganisms);
-        console.log('Kept', newOrganisms.length, 'existing organisms');
 
         while ( newOrganismsNeeded > 0 ) {
             var choices = this.selector.choose(this);

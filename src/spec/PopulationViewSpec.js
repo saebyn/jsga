@@ -65,6 +65,10 @@ describe('Population view', function () {
             this.simpleOrganismViewStub = sinon.stub(jsGA, 'OrganismSimpleView')
                 .returns(this.organismView);
 
+            this.settingsView = new Backbone.View;
+            this.settingsViewStub = sinon.stub(jsGA, 'PopulationSettingsView')
+                .returns(this.settingsView);
+
             this.organism1 = new Backbone.Model;
             this.organism2 = new Backbone.Model;
             this.organism3 = new Backbone.Model;
@@ -78,6 +82,13 @@ describe('Population view', function () {
         afterEach(function () {
             jsGA.OrganismSimpleView.restore();
             this.simpleOrganismViewStub.restore();
+            this.settingsViewStub.restore();
+        });
+
+        it('should render a PopulationSettingsView', function () {
+            var renderSpy = sinon.spy(this.settingsView, 'render');
+            this.view.render();
+            expect(renderSpy).toHaveBeenCalledOnce();
         });
 
         it('should create an OrganismSimpleView for each organism', function () {

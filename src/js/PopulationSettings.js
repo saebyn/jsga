@@ -17,7 +17,7 @@ jsGA.PopulationSettings = Backbone.Model.extend({
         chromosomeLength: 10,
     },
 
-    initialize: function (models, options) {
+    initialize: function (options) {
         options = options || {};
     },
 
@@ -47,7 +47,7 @@ jsGA.PopulationSettings = Backbone.Model.extend({
         }
 
         if ( 'selectionMechanism' in attrs ) {
-            var validMechanisms = {fp: true, sus: true};
+            var validMechanisms = {fp: true, tournament: true};
             if ( !(attrs.selectionMechanism in validMechanisms) ) {
                 return 'The selectedd selection mechanism is not supported';
             }

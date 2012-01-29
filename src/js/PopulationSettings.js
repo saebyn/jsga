@@ -17,8 +17,25 @@ jsGA.PopulationSettings = Backbone.Model.extend({
         chromosomeLength: 10,
     },
 
+    selectionMechanismNames: {
+        fp: 'Fitness Proportionate',
+        tournament: 'Tournament'
+    },
+
     initialize: function (options) {
         options = options || {};
+    },
+
+    escape: function (attribute) {
+        if ( attribute === 'selectionMechanism' ) {
+            return this.selectionMechanismNames[this.get(attribute)];
+        } else {
+            return Backbone.Model.prototype.escape.call(this, attribute);
+        }
+    },
+
+    isDefault: function (attribute) {
+        return this.defaults[attribute] === this.get(attribute);
     },
 
     validate: function (attrs) {

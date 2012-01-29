@@ -92,3 +92,35 @@
   <div class="vis"></div>
   Fitness: <%= model.fitness() %>
 </script>
+
+<script type="text/template" id="population-settings-view-template">
+  <a class="btn" href="javascript:;" data-controls-modal="population-settings-modal" data-keyboard="true" data-backdrop="true">Settings</a>
+  <div id="population-settings-modal" class="modal fade">
+    <table>
+      <tr id="size">
+        <th scope="row">Starting Population</th>
+        <td<% if ( settings.isDefault('size') ) { %> class="default"<% } %>><%= settings.escape('size') %></td>
+      </tr>
+      <tr id="fitness">
+        <th scope="row">Fitness Function</th>
+        <td<% if ( settings.isDefault('fitness') ) { %> class="default"<% } %>><%= settings.escape('fitness') %></td>
+      </tr>
+      <tr id="selectionMechanism">
+        <th scope="row">Selection Mechanism</th>
+        <td<% if ( settings.isDefault('selectionMechanism') ) { %> class="default"<% } %>><%= settings.escape('selectionMechanism') %></td>
+      </tr>
+      <tr id="elitism">
+        <th scope="row">Elitism</th>
+        <td<% if ( settings.isDefault('elitism') ) { %> class="default"<% } %>><% if ( settings.get('elitism') > 0 ) { %><%= settings.escape('elitism') %>%<% } else {%>Off<% } %></td>
+      </tr>
+      <tr id="crossoverProbability">
+        <th scope="row">Crossover Probability</th>
+        <td<% if ( settings.isDefault('crossoverProbability') ) { %> class="default"<% } %>><%= settings.escape('crossoverProbability') %></td>
+      </tr>
+      <tr id="mutationProbability">
+        <th scope="row">Mutation Probability</th>
+        <td<% if ( settings.isDefault('mutationProbability') ) { %> class="default"<% } %>><%= settings.escape('mutationProbability') %></td>
+      </tr>
+    </table>
+  </div>
+</script>

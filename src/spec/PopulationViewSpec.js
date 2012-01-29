@@ -5,6 +5,10 @@ describe('Population view', function () {
         this.collection = new Backbone.Collection([
             new Backbone.Model
         ]);
+        this.collection.settings = new Backbone.Model;
+        this.collection.settings.isDefault = function (attr) {
+            return false;
+        };
         this.view = new jsGA.PopulationView({
             collection: this.collection
         });

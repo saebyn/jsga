@@ -3,7 +3,7 @@
 describe('The FitnessProportionateSelector', function () {
     beforeEach(function () {
         this.selector = new jsGA.FitnessProportionateSelector();
-        this.population = new jsGA.Population([], {model: jsGA.Organism});
+        this.population = new jsGA.Population([], {model: jsGA.Organism, selector: this.selector});
         this.population.seed(new jsGA.PopulationSettings({size: 4}));
         this.randomStub = sinon.stub(Math, 'random');
     });

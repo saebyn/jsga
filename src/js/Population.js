@@ -7,11 +7,11 @@ jsGA = this.jsGA = this.jsGA || {};
 
 jsGA.Population = Backbone.Collection.extend({
     initialize: function (models, options) {
-        options = options || {};
+        this.options = options || {};
         
-        this.selector = options.selector || new jsGA.FitnessProportionateSelector;
         this.settings = new jsGA.PopulationSettings;
-        this.model = options.model || jsGA.Organism;
+        this.updateSelector(this.settings.get('selectionMechanism'));
+        this.model = this.options.model || jsGA.Organism;
     },
 
     /**
@@ -23,6 +23,11 @@ jsGA.Population = Backbone.Collection.extend({
         return -organism.fitness();
     },
 
+    updateSelector: function (selectorName) {
+        // TODO
+        this.selector = this.options.selector || new jsGA.FitnessProportionateSelector;
+    },
+
     /**
      * seed
      *
@@ -32,6 +37,7 @@ jsGA.Population = Backbone.Collection.extend({
     seed: function(settings) {
         // Keep the settings model around for later use.
         this.settings.set(settings.toJSON());
+        this.updateSelector(settings.get('selectionMechanism'));
 
         // Define the default options for population seeding.
         var defaultOptions = {size: 2};

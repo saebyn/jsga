@@ -96,6 +96,7 @@ jsGA.CreatePopulationView = Backbone.View.extend({
 
     create: function () {
         this.collection.reset();
+
         this.collection.seed(this.model);
         window.router.navigate('', true);
     }

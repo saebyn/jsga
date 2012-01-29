@@ -46,7 +46,7 @@ jsGA.Population = Backbone.Collection.extend(
     # generations.
     #
     run: (generations) ->
-        generations ||= 1
+        generations ?= 1
 
         if ( generations <= 0 )
             return
@@ -58,7 +58,7 @@ jsGA.Population = Backbone.Collection.extend(
         ), 100
 
     stop: () ->
-        if ( @timer )
+        if @timer
             clearTimeout(@timer)
             @timer = false
 

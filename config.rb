@@ -75,6 +75,13 @@ configure :build do
   
   # Minify Javascript on build
   activate :minify_javascript
+
+  # Don't include our jasmine specs in the build
+  ignore 'spec/*'
+  ignore 'javascripts/lib/jasmine/*'
+  ignore 'javascripts/lib/jasmine-*'
+  ignore 'javascripts/lib/sinon.js'
+  ignore 'testrunner.html'
   
   # Enable cache buster
   # activate :cache_buster

@@ -76,5 +76,21 @@ describe('Create population view', function () {
             expect(this.view.$('#selection-elitism')).toBeDisabled();
             expect(this.view.$('#selection-elitism').val()).toEqual('0');
         });
+
+        it('should show the tournament size input when the tournament selection mechanism is selected', function () {
+            // TODO
+        });
+
+        it('should include the tournament size option in the settings when the tournament selection mechanism is selected', function () {
+            // TODO
+        });
+
+        it('should hide the tournament size input when the tournament selection mechanism is not selected', function () {
+            // TODO
+        });
+
+        it('should not include the tournament size option in the settings when the tournament selection mechanism is not selected', function () {
+            // TODO
+        });
     });
 });

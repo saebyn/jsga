@@ -1,6 +1,12 @@
 
 Now:
 
+Show any additional options when the selection mechanism changes.
+
+Add tournament size option.
+
+Implement tournament selection.
+
 Allow creator to specify the size of the chromosome
 
 Allow creator to specify chromosome bases
@@ -13,7 +19,7 @@ Allow the user to fetch the settings model from local storage in the creator
 
 Add reset population button to settings display on population view
 
-Add save settings button to settings display on population view
+Add save settings as... button to settings display on population view
 
 Create and keep a log of population activity
 

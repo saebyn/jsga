@@ -1,30 +1,32 @@
 
 Now:
 
-Allow creator to specify the size of the chromosome
+* Allow creator to specify the size of the chromosome
 
-Allow creator to specify chromosome bases
+* Allow creator to specify chromosome bases
 
-Add local storage sync to pop. settings model.
+* Add local storage sync to pop. settings model.
 
-Allow the user to fetch the settings model from local storage in the creator
+* Allow the user to fetch the settings model from local storage in the creator
 
-Add reset population button to settings display on population view
+* Add reset population button to settings display on population view
 
-Add save settings as... button to settings display on population view
+* Add save settings as... button to settings display on population view
 
 Sooner:
 
-Create and keep a log of population activity
+* Create and keep a log of population activity
 
-Allow the user to view the log of population activity related to a specific organism
+* Allow the user to view the log of population activity related to a specific organism
+
+* Generate population statistics from log
 
 Later:
 
-Allow mutiple chromosomes ( with different lengths and bases )
+* Allow mutiple chromosomes ( with different lengths and bases )
 
-Support visualization of chromosomes with non-flat structure
+* Support visualization of chromosomes with non-flat structure
 
-Support multiple species (Organism.type) in the population.
+* Support multiple species (Organism.type) in the population.
 
-Add my notes from my GA book into here and do them :)
+* Add my notes from my GA book into here and do them :)

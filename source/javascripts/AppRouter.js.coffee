@@ -11,7 +11,11 @@ jsGA.AppRouter = Backbone.Router.extend(
     initialize: (optioins) ->
         @population = new jsGA.Population()
 
-    index: () ->
+    index: ->
+        if not Modernizr.canvas || not Modernizr.localstorage
+            $('#main').html('<div class="alert-message error">Your browser does not support the &lt;canvas&gt; element or the HTML5 Web Storage API. Please upgrade your browser to use this application.</div>')
+            return
+
         if ( @population.length <= 0 )
             @navigate('create', true)
             return
@@ -22,7 +26,7 @@ jsGA.AppRouter = Backbone.Router.extend(
         $('#main').html(@populationView.render().el)
         $('#side').html('')
 
-    createPopulation: () ->
+    createPopulation: ->
         @createPopulationView = new jsGA.CreatePopulationView(
             collection: @population
         )

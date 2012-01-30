@@ -1,13 +1,7 @@
 
 Now:
 
-* Add local storage sync to pop. settings model.
-
 * Allow the user to fetch the settings model from local storage in the creator
-
-* Add reset population button to settings display on population view
-
-* Add save settings as... button to settings display on population view
 
 Sooner:
 

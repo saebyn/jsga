@@ -169,5 +169,11 @@
         <td<% if ( settings.isDefault('mutationProbability') ) { %> class="default"<% } %>><%= settings.escape('mutationProbability') %>%</td>
       </tr>
     </table>
+    <form>
+      <div class="actions">
+        <input type="button" class="btn save primary" value="Save">
+        <input type="button" class="btn reset" value="Reset population with these settings">
+      </div>
+    </form>
   </div>
 </script>

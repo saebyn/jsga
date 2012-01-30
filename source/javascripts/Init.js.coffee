@@ -1,3 +1,4 @@
+# Copyright (c) 2012 John Weaver. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # vim:ff=unix:nowrap:tabstop=2:shiftwidth=2:softtabstop=2:smarttab:shiftround:expandtab
 $(document).ready(() ->

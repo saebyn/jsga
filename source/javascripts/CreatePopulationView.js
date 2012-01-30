@@ -9,16 +9,26 @@ jsGA.CreatePopulationView = Backbone.View.extend({
     events: {
         'click .create': 'create',
         'change #selection-elitism-enabled': 'toggleElitism',
-        'change #selection-mechanism': 'updateMechanismOptions'
+        'change #selection-mechanism': 'updateMechanismOptions',
+        'click .load': 'loadSavedSettings'
     },
     tagName: 'div',
     className: 'creator',
 
     initialize: function (options) {
         options = options || {};
-        _.bindAll(this, 'create', 'toggleElitism', 'updateMechanismOptions');
+        _.bindAll(this, 'create', 'toggleElitism', 'updateMechanismOptions', 'loadSavedSettings');
         this.model = this.model || new jsGA.PopulationSettings;
+        this.existingSettings = new jsGA.PopulationSettingsCollection();
+        this.existingSettings.fetch();
         this.template = _.template(options.template || $('#population-create-template').html());
+    },
+
+    loadSavedSettings: function () {
+        var id = this.$('#load-settings').val();
+        if ( id ) {
+            this.model.set(this.existingSettings.get(id).toJSON());
+        }
     },
 
     clearFormError: function (selector) {
@@ -36,9 +46,9 @@ jsGA.CreatePopulationView = Backbone.View.extend({
     setField: function (jqe, val) {
       if ( jqe.attr('type') === 'checkbox' || jqe.attr('type') === 'radio' ) {
           jqe.prop('checked', false);
-          jqe.filter('[value="' + val + '"]').prop('checked', true);
+          jqe.filter('[value="' + val + '"]').prop('checked', true).change();
       } else {
-          jqe.val(val);
+          jqe.val(val).change();
       }
     },
 
@@ -54,6 +64,9 @@ jsGA.CreatePopulationView = Backbone.View.extend({
         this.model.bind('change:' + field, function (model, val) {
             self.clearFormError(selector);
             self.setField(self.$(selector), outfilter(val));
+            if ( field === 'elitism' ) {
+                $('#selection-elitism-enabled').prop('checked', val > 0).change();
+            }
         });
 
         this.$(selector).bind(event, function (ev) {
@@ -71,7 +84,9 @@ jsGA.CreatePopulationView = Backbone.View.extend({
     render: function () {
         $('.topbar .nav li').removeClass('active');
         $('.topbar .nav a[href="#create"]').parents('li').addClass('active');
-        $(this.el).html(this.template());
+        $(this.el).html(this.template({
+            existingSettings: this.existingSettings
+        }));
         this.bindFormField('#population-size', 'change', 'size',
                            function (a) { return parseInt(a, 10); });
         this.bindFormField('#selection-mechanism', 'change', 'selectionMechanism');

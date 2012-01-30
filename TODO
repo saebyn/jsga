@@ -1,11 +1,9 @@
 
 Now:
 
-* Allow the user to fetch the settings model from local storage in the creator
+* Create and keep a log of population activity
 
 Sooner:
-
-* Create and keep a log of population activity
 
 * Allow the user to view the log of population activity related to a specific organism
 

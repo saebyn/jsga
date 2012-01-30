@@ -117,6 +117,21 @@
     <div class="actions">
       <input type="button" class="create btn primary" value="Create">
     </div>
+
+    <div class="clearfix">
+      <label for="load-settings">Load Saved Settings...</label>
+      <div class="input">
+        <select id="load-settings">
+          <option value=""></option>
+          <% existingSettings.each(function (model) { %>
+          <option value="<%= model.id %>"><%= model.get('name') %></option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
+    <div class="actions">
+      <input type="button" class="btn small load" value="Load">
+    </div>
   </form>
 </script>
 

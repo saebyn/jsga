@@ -3,6 +3,10 @@
 
 jsGA = this.jsGA = this.jsGA || {}
 
+jsGA.PopulationSettingsCollection = Backbone.Collection.extend(
+    localStorage: new Store('populationsettings')
+)
+
 jsGA.PopulationSettings = Backbone.Model.extend(
     localStorage: new Store('populationsettings')
 

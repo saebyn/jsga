@@ -33,25 +33,39 @@ jsGA.CreatePopulationView = Backbone.View.extend({
         this.$(selector).parents('.clearfix').addClass('error');
     },
 
-    bindFormField: function (selector, event, field, filter) {
-        filter = filter || function (a) { return a; };
+    setField: function (jqe, val) {
+      if ( jqe.attr('type') === 'checkbox' || jqe.attr('type') === 'radio' ) {
+          jqe.prop('checked', false);
+          jqe.filter('[value="' + val + '"]').prop('checked', true);
+      } else {
+          jqe.val(val);
+      }
+    },
+
+    getField: function (jqe) {
+      return jqe.val();
+    },
+
+    bindFormField: function (selector, event, field, filter, outfilter) {
+        filter = filter || _.identity;
+        outfilter = outfilter || _.identity;
 
         var self = this;
         this.model.bind('change:' + field, function (model, val) {
             self.clearFormError(selector);
-            self.$(selector).val(val);
+            self.setField(self.$(selector), outfilter(val));
         });
 
         this.$(selector).bind(event, function (ev) {
             var data = {};
-            data[field] = filter(self.$(ev.target).val());
+            data[field] = filter(self.getField(self.$(ev.target)));
             self.model.set(data, {error: function (model, message) {
-                self.$(selector).val(self.model.get(field));
+                self.setField(self.$(selector), outfilter(self.model.get(field)));
                 self.setFormError(selector, message);
             }});
         });
 
-        this.$(selector).val(this.model.get(field));
+        this.setField(this.$(selector), outfilter(this.model.get(field)));
     },
 
     render: function () {
@@ -63,6 +77,18 @@ jsGA.CreatePopulationView = Backbone.View.extend({
         this.bindFormField('#selection-mechanism', 'change', 'selectionMechanism');
         this.bindFormField('#tournament-size', 'change', 'tournamentSize',
                            function (a) { return parseInt(a, 10); });
+        this.bindFormField('#chromosome-length', 'change', 'chromosomeLength',
+                           function (a) { return parseInt(a, 10); });
+        this.bindFormField('input[name="chromosome-bases"]', 'change', 'bases',
+                           function (baseType) {
+                               if ( baseType === 'binary' ) {
+                                   return [0, 1];
+                               }
+                           }, function (bases) {
+                               if ( _.isEqual(bases, [0, 1]) ) {
+                                   return 'binary';
+                               }
+                           });
         this.bindFormField('#selection-elitism', 'change', 'elitism',
                            function (a) { return parseFloat(a); });
         this.bindFormField('#crossover-probability', 'change', 'crossoverProbability',

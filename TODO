@@ -1,10 +1,6 @@
 
 Now:
 
-* Allow creator to specify the size of the chromosome
-
-* Allow creator to specify chromosome bases
-
 * Add local storage sync to pop. settings model.
 
 * Allow the user to fetch the settings model from local storage in the creator

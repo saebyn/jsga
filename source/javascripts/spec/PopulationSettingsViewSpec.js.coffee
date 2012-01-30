@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 # vim:ff=unix:nowrap:tabstop=4:shiftwidth=4:softtabstop=4:smarttab:shiftround:expandtab
 
-describe 'Population settings view', () ->
-    beforeEach () ->
+describe 'Population settings view', ->
+    beforeEach ->
         @model = new jsGA.PopulationSettings
 
         @view = new jsGA.PopulationSettingsView(
             model: @model
         )
 
-    it 'should create a div element', () ->
+    it 'should create a div element', ->
         expect(@view.el.nodeName).toEqual('DIV')
 
-    it 'should have a class of settings', () ->
+    it 'should have a class of settings', ->
         expect($(@view.el)).toHaveClass('settings')
 
-    it 'should have a render that returns the view object', () ->
+    it 'should have a render that returns the view object', ->
         expect(@view.render()).toEqual(@view)
 
-    describe 'Rendering', () ->
+    describe 'Rendering', ->
         beforeEach () ->
             @view.render()
 

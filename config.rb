@@ -77,7 +77,7 @@ configure :build do
   activate :minify_javascript
 
   # Don't include our jasmine specs in the build
-  ignore 'spec/*'
+  ignore 'javascripts/spec/*'
   ignore 'javascripts/lib/jasmine/*'
   ignore 'javascripts/lib/jasmine-*'
   ignore 'javascripts/lib/sinon.js'

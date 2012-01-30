@@ -13,7 +13,7 @@ jsGA.PopulationSettings = Backbone.Model.extend({
         crossoverProbability: 70.0,
         mutationProbability: 0.1,
         fitness: "return _.reduce(this.get('chromosome'), function(memo, num){ return memo + num; }, 0);",
-        bases: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        bases: [0, 1],
         chromosomeLength: 10,
     },
 
@@ -77,6 +77,10 @@ jsGA.PopulationSettings = Backbone.Model.extend({
         }
 
         if ( 'bases' in attrs ) {
+            if ( !attrs.bases ) {
+                return 'A set of chromosomal bases must be selected';
+            }
+
             if ( attrs.bases.length == 0 ) {
                 return 'There must be at least one chromosome base';
             }

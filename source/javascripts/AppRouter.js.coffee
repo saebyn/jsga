@@ -13,7 +13,7 @@ jsGA.AppRouter = Backbone.Router.extend(
         @population = new jsGA.Population()
 
     index: ->
-        if not Modernizr.canvas || not Modernizr.localstorage
+        if not Modernizr.canvas or not Modernizr.localstorage
             $('#main').html('<div class="alert-message error">Your browser does not support the &lt;canvas&gt; element or the HTML5 Web Storage API. Please upgrade your browser to use this application.</div>')
             return
 

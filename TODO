@@ -1,4 +1,13 @@
 
+
+Bugs:
+
+* Clicking create new population won't load new saved settings
+
+* Combine JS Files : use https://github.com/matt-hh/middleman-jammit
+
+* Move more JS to bottom of page
+
 Now:
 
 * Create and keep a log of population activity

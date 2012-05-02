@@ -77,13 +77,13 @@ _.extend(jsGA.ChromosomeVisualization.prototype,
         value *= step
         value = Math.round(value + 127.0)
 
-        if ( r === false )
+        if ( r == false )
             r = value
 
-        if ( g === false )
+        if ( g == false )
             g = value
 
-        if ( b === false)
+        if ( b == false)
             b = value
 
         rs = r.toString(16)

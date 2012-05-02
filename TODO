@@ -12,6 +12,8 @@ Now:
 
 * Create and keep a log of population activity
 
+* Finish converting to coffeescript
+
 Sooner:
 
 * Allow the user to view the log of population activity related to a specific organism

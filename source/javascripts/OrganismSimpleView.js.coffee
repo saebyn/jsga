@@ -9,18 +9,17 @@ jsGA.OrganismSimpleView = Backbone.View.extend(
     events:
         'click': 'showDetails'
 
-    initialize: () ->
+    initialize: ->
         _.bindAll(this, 'showDetails')
 
-    render: () ->
+    render: ->
         $(@el).text(JSON.stringify(@model.get('chromosome')))
         $(@el).attr('id', @model.cid)
         vis = new jsGA.ChromosomeVisualization(@el)
         vis.addChromosome(this.model.get('chromosome'), @model.get('bases'))
         vis.render()
+        this
 
-        @
-
-    showDetails: () ->
+    showDetails: ->
         window.router.navigate('organism/' + @model.cid, true)
 )

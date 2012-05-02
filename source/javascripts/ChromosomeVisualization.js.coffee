@@ -4,12 +4,10 @@
 
 jsGA = this.jsGA = this.jsGA || {};
 
-jsGA.ChromosomeVisualization = (el, width, height) ->
-    this.initialize.apply(this, [$(el), width, height])
 
-
-_.extend(jsGA.ChromosomeVisualization.prototype, 
-    initialize: (el, width, height) ->
+class jsGA.ChromosomeVisualization
+    constructor: (el, width, height) ->
+        el = $(el)
         width or= 40
         height or= 20
         # Create a canvas the same size as the existing element.
@@ -69,7 +67,7 @@ _.extend(jsGA.ChromosomeVisualization.prototype,
         [Math.floor(canvasWidth / n), Math.floor(canvasHeight / n)]
 
     _getColorFromRange: (value, range, r, g, b) ->
-        if ( range <= 0 )
+        if range <= 0
             range = 1
 
         step = 128.0 / range
@@ -77,22 +75,27 @@ _.extend(jsGA.ChromosomeVisualization.prototype,
         value *= step
         value = Math.round(value + 127.0)
 
-        if ( r == false )
+        if not r
             r = value
 
-        if ( g == false )
+        if not g
             g = value
 
-        if ( b == false)
+        if not b
             b = value
 
         rs = r.toString(16)
         gs = g.toString(16)
         bs = b.toString(16)
 
-        rs = rs.length == 2 ? rs : '0' + rs
-        gs = gs.length == 2 ? gs : '0' + gs
-        bs = bs.length == 2 ? bs : '0' + bs
+        if rs.length == 1
+            rs = '0' + rs
+
+        if gs.length == 1
+            gs = '0' + gs
+
+        if bs.length == 1
+            bs = '0' + bs
 
         '#' + rs + gs + bs
 
@@ -107,7 +110,7 @@ _.extend(jsGA.ChromosomeVisualization.prototype,
         while y < canvasHeight
             x = 0
             while (x + cellSize[0]) < canvasWidth
-                cells.push [x, y, cellSize[0], cellSize[1]]
+                cells.push([x, y, cellSize[0], cellSize[1]])
                 length--
 
                 # stop if we've already generated enough cells
@@ -123,10 +126,10 @@ _.extend(jsGA.ChromosomeVisualization.prototype,
     _drawCanvas: (canvas, cells, colors) ->
         # iterate over colors and cells
         # paint each cell onto the canvas
-        context = canvas.getContext('2d');
-        context.textBaseline = 'middle';
-        context.textAlign = 'center';
-        context.font = 'normal 13px "Helvetica Neue",Helvetica,Arial,sans-serif';
+        context = canvas.getContext('2d')
+        context.textBaseline = 'middle'
+        context.textAlign = 'center'
+        context.font = 'normal 13px "Helvetica Neue",Helvetica,Arial,sans-serif'
         for i in [0...cells.length]
             cell = cells[i]
             x = cell[0]
@@ -139,8 +142,7 @@ _.extend(jsGA.ChromosomeVisualization.prototype,
             # If the cell is sufficiently large, render the text
             # of the original base in the cell.
             baseText = JSON.stringify(this.rawBases[i])
-            textMetric = context.measureText(baseText);
+            textMetric = context.measureText(baseText)
             if textMetric.width < width / 2
                 context.fillStyle = '#000000'
                 context.fillText(baseText, x + width / 2, y + height / 2)
-)

@@ -88,10 +88,9 @@ jsGA.CreatePopulationView = Backbone.View.extend(
                        (baseType) ->
                            [0, 1] if baseType == 'binary'
                        , (bases) ->
-                           'binary' if _.isEqual(bases, [0, 1])
-                      )
+                           'binary' if _.isEqual(bases, [0, 1]))
         @bindFormField('#selection-elitism', 'change', 'elitism', parseFloat)
-        @bindFormField('#crossover-probability', 'change', 'crossoverProbability', parseFlaot)
+        @bindFormField('#crossover-probability', 'change', 'crossoverProbability', parseFloat)
         @bindFormField('#mutation-probability', 'change', 'mutationProbability', parseFloat)
         @bindFormField('#fitness-function', 'change', 'fitness')
         this

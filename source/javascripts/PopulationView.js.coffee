@@ -15,6 +15,7 @@ jsGA.PopulationView = Backbone.View.extend(
 
     initialize: (options) ->
         options or= {}
+        _.bindAll(this)
         @collection.bind('add', @renderOrganisms, this)
         @collection.bind('remove', @renderOrganisms, this)
         @collection.bind('change', @renderOrganisms, this)
@@ -53,15 +54,15 @@ jsGA.PopulationView = Backbone.View.extend(
     disableControls: ->
         @$('input.step, input.run').prop('disabled', true)
 
-    step: =>
+    step: ->
         @disableControls()
         @collection.run()
 
-    stop: =>
+    stop: ->
         @enableControls()
         @collection.stop()
 
-    run: =>
+    run: ->
         steps = parseInt(@$('input.steps').val(), 10)
         if steps > 0 # keeps NaN out, since any comparison to NaN is false.
             @disableControls()

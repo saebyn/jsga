@@ -2,4 +2,5 @@
 *.bak
 *.swp
 build/
+source/javascripts/lib
 .sass-cache

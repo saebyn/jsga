@@ -2,8 +2,6 @@
 
 Bugs:
 
-* Clicking create new population won't load new saved settings
-
 * Combine JS Files : use https://github.com/matt-hh/middleman-jammit
 
 * Move more JS to bottom of page
@@ -19,6 +17,10 @@ Sooner:
 * Generate population statistics from log
 
 Later:
+
+* Web workers?
+
+* Update backbone.js and other deps
 
 * Allow mutiple chromosomes ( with different lengths and bases )
 

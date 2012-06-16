@@ -20,6 +20,7 @@ jsGA.CreatePopulationView = Backbone.View.extend(
         _.bindAll(this)
         @model or= new jsGA.PopulationSettings
         @existingSettings = new jsGA.PopulationSettingsCollection()
+        @existingSettings.bind('add', @addSetting)
         @existingSettings.fetch()
         @template = _.template(options.template || $('#population-create-template').html())
 
@@ -69,6 +70,9 @@ jsGA.CreatePopulationView = Backbone.View.extend(
         )
 
         @setField(@$(selector), outfilter(@model.get(field)))
+
+    addSetting: (model) ->
+        @$('select#load-settings').append('<option value="' + model.id + '">' + model.get('name') + '</option>')
 
     render: ->
         $('.topbar .nav li').removeClass('active')

@@ -10,11 +10,10 @@ jsGA.PopulationSettingsView = Backbone.View.extend(
 
     initialize: (options) ->
         options = options || {}
+        _.bindAll(this, 'save')
         @template = _.template(options.template || $('#population-settings-view-template').html())
 
-        $('body').on('click', '#population-settings-modal input.save', =>
-            @save()
-        )
+        $('body').on('click', '#population-settings-modal input.save', _.debounce(@save, 1000, true))
         $('body').on('click', '#population-settings-modal input.reset', =>
             @reset()
         )

@@ -130,6 +130,7 @@ class jsGA.ChromosomeVisualization
         context.textBaseline = 'middle'
         context.textAlign = 'center'
         context.font = 'normal 13px "Helvetica Neue",Helvetica,Arial,sans-serif'
+        minTextMetric = Math.min.apply(this, (context.measureText(baseText).width for baseText of @rawBases))
         for i in [0...cells.length]
             cell = cells[i]
             x = cell[0]
@@ -141,8 +142,9 @@ class jsGA.ChromosomeVisualization
             context.fillRect(x, y, width, height)
             # If the cell is sufficiently large, render the text
             # of the original base in the cell.
-            baseText = JSON.stringify(this.rawBases[i])
-            textMetric = context.measureText(baseText)
-            if textMetric.width < width / 2
-                context.fillStyle = '#000000'
-                context.fillText(baseText, x + width / 2, y + height / 2)
+            if minTextMetric < width / 2
+              baseText = JSON.stringify(@rawBases[i])
+              textMetric = context.measureText(baseText)
+              if textMetric.width < width / 2
+                  context.fillStyle = '#000000'
+                  context.fillText(baseText, x + width / 2, y + height / 2)

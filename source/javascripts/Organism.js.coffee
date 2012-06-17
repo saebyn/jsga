@@ -14,15 +14,21 @@ jsGA.Organism = Backbone.Model.extend(
             @set({chromosome: @generateChromosome(chromosomeLength)})
 
         @bind('change:chromosome', @updateFitness, this)
-        @bind('change:fitness', @updateFitness, this)
+        @bind('change:fitness', @updateFitnessDef, this)
+
+    fitnessDef: ->
+        0
+
+    updateFitnessDef: ->
+        @fitnessDef = new Function(@get('fitness'))
+        @updateFitness()
 
     updateFitness: ->
-        f = new Function(@get('fitness'))
-        @_fitness = f.apply(this)
+        @_fitness = @fitnessDef.apply(this)
 
     fitness: ->
         if not @_fitness
-            @updateFitness()
+            @updateFitnessDef()
 
         @_fitness
 
@@ -62,8 +68,7 @@ jsGA.Organism = Backbone.Model.extend(
                 mutationOccurred = true
 
         if mutationOccurred 
-            @unset('chromosome')
-            @set({chromosome: chromosome})
+            @set({chromosome: chromosome}, {silent: true})
 
     #
     # Crossover this organism with another.

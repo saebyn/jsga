@@ -7,7 +7,8 @@
                              'lib/json2',
                              'lib/backbone',
                              'lib/backbone.localStorage',
-                             'lib/bootstrap-modal'], :defer => 'defer') %>
+                             'lib/bootstrap-modal',
+                             'lib/bootstrap-collapse'], :defer => 'defer') %>
 
   <%= javascript_include_tag(['ChromosomeVisualization',
                              'Population',
@@ -21,7 +22,11 @@
                              'OrganismView', 
                              'OrganismSimpleView',
                              'PopulationSettingsView',
+                             'HelpView',
                              'Init'], :defer => 'defer') %>
 <% end %>
 
-Loading...
+<h1>Loading Application</h1>
+<div class="progress progress-striped active">
+  <div class="bar" style="width: 40%;"></div>
+</div>

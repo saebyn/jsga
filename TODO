@@ -1,14 +1,18 @@
 
 
-Bugs:
-
-* Combine JS Files : use https://github.com/matt-hh/middleman-jammit
-
-* Move more JS to bottom of page
-
 Now:
 
-* Create and keep a log of population activity
+* Add control to population view to limit the number of organisms displayed at once. (maybe have paging or smooth scroll through)
+
+* Keep a log of population activity in localstorage
+
+  - which organisms reproduced
+
+  - which children the organism has each generation
+
+  - how many generations the organism lived
+
+  - which other organisms the organism bred with each generation to produce its children
 
 Sooner:
 
@@ -29,3 +33,8 @@ Later:
 * Support multiple species (Organism.type) in the population.
 
 * Add my notes from my GA book into here and do them :)
+
+* Combine JS Files : use https://github.com/matt-hh/middleman-jammit
+
+* Move more JS to bottom of page
+

@@ -66,7 +66,7 @@
 # set :js_dir, "alternative_js_directory"
 
 # Change the images directory
-# set :images_dir, "alternative_image_directory"
+set :images_dir, "img"
 
 # Build-specific configuration
 configure :build do

@@ -5,65 +5,64 @@
     Click an organism icon above to view its details.
   </div>
   <form>
-    <div class="actions">
-      <input type="button" class="step btn primary" value="Step">
-      <input type="button" class="run btn" value="Run for ...">
-      <label><input type="number" class="steps span2" placeholder="10" value="10"><span>steps</span></label>
-      <input type="button" class="stop btn danger" value="Stop">
-    </div>
+    <fieldset>
+      <div class="form-actions">
+        <input type="button" class="step btn btn-primary" value="Step">
+        <input type="button" class="run btn" value="Run for ...">
+        <input type="number" class="steps span2" placeholder="10" value="10"><span>steps</span>
+        <input type="button" class="stop btn btn-danger" value="Stop">
+      </div>
+    </fieldset>
   </form>
 </script>
 
 <script type="text/template" id="population-create-template">
   <h1>Create New Population</h1>
-  <form>
-    <div class="clearfix">
-      <label for="population-size">Starting Population</label>
-      <div class="input">
+  <form class="form-horizontal">
+    <fieldset>
+    <div class="control-group">
+      <label for="population-size" class="control-label">Starting Population</label>
+      <div class="controls">
         <input type="number" id="population-size" name="population-size" class="size span2" placeholder="20" value="20" min="2" max="250" step="1.0">
         <span class="help-block">How many organisms should be seeded into the first generation?</span>
       </div>
     </div>
 
-    <div class="clearfix">
-      <label for="fitness-function">Fitness Function</label>
-      <div class="input">
+    <div class="control-group">
+      <label for="fitness-function" class="control-label">Fitness Function</label>
+      <div class="controls">
         <textarea id="fitness-function" name="fitness-function" rows="8" class="xxlarge"></textarea>
-        <span class="help-block">This should be a Javascript code block that returns the calculated fitness for a given organism.</span>
+        <span class="help-block">This should be a Javascript code block that returns the calculated fitness for a given organism. [<a href="#help/fitness">more</a>]</span>
       </div>
     </div>
 
     <fieldset>
       <legend>Chromosome</legend>
 
-      <div class="clearfix">
-        <label for="chromosome-length">Length</label>
-        <div class="input">
+      <div class="control-group">
+        <label for="chromosome-length" class="control-label">Length</label>
+        <div class="controls">
           <input type="number" id="chromosome-length" name="chromosome-length" class="span2" placeholder="10" value="10" min="1" max="1000" step="1">
           <span class="help-block">How many bases should each organism's chromosome have?</span>
         </div>
       </div>
 
-      <div class="clearfix">
-        <label id="chromosome-bases">Bases</label>
-        <div class="input">
-          <ul class="inputs-list">
-            <li>
-              <label>
-                <input type="radio" name="chromosome-bases" value="binary" checked="checked">
-                <span>Binary - the chromosome will be a bitstring</span>
-              </label>
-            </li>
-          </ul>
+      <div class="control-group">
+        <label id="chromosome-bases" class="control-label">Bases</label>
+        <div class="controls">
+          <label class="radio">
+            <input type="radio" name="chromosome-bases" value="binary" checked="checked">
+            Binary - the chromosome will be a bitstring
+          </label>
         </div>
       </div>
     </fieldset>
 
     <fieldset>
       <legend>Selection</legend>
-      <div class="clearfix">
-        <label for="selection-mechanism">Mechanism</label>
-        <div class="input">
+      <div class="control-group">
+        <label for="selection-mechanism" class="control-label">Mechanism</label>
+        <div class="controls">
           <select name="selection-mechanism" id="selection-mechanism" class="span3">
             <option value="fp">Fitness Proportionate</option>
             <option value="tournament">Tournament</value>
@@ -71,20 +70,20 @@
           <span class="help-block">What mechanism should be used to select organisms to reproduce?</span>
         </div>
       </div>
-      <div class="clearfix optional">
-        <label for="tournament-size">Tournament Size</label>
-        <div class="input">
+      <div class="control-group optional">
+        <label for="tournament-size" class="control-label">Tournament Size</label>
+        <div class="controls">
           <input type="number" name="tournament-size" id="tournament-size" min="1" step="1" placeholder="10" value="10">
           <span class="help-block">What number of organisms should be randomly chosen for each tournament?</span>
         </div>
       </div>
-      <div class="clearfix">
-        <label for="selection-elitism">Elitism</label>
-        <div class="input">
+      <div class="control-group">
+        <label for="selection-elitism" class="control-label">Elitism</label>
+        <div class="controls">
           <div class="input-prepend">
-            <label class="add-on">
+            <span class="add-on checkbox">
               <input type="checkbox" id="selection-elitism-enabled" name="selection-elitism-enabled">
-            </label>
+            </span>
             <input type="number" class="mini" name="selection-elitism" id="selection-elitism" min="0" max="100" step="0.1" placeholder="10.0" value="10.0" disabled>%
           </div>
           <span class="help-block">What percentage of the most fit organisms in each generation should be directly cloned into the next generation?</span>
@@ -93,9 +92,9 @@
     </fieldset>
     <fieldset>
       <legend>Crossover</legend>
-      <div class="clearfix">
-        <label for="crossover-probability">Probability</label>
-        <div class="input">
+      <div class="control-group">
+        <label for="crossover-probability" class="control-label">Probability</label>
+        <div class="controls">
           <input type="number" name="crossover-probabilty" id="crossover-probabilty" min="0" max="100" step="0.1" placeholder="70.0" value="70.0">%
           <span class="help-block">For each pair of organisms selected to reproduce, what is the probability that a crossover will occur?</span>
         </div>
@@ -103,32 +102,34 @@
     </fieldset>
     <fieldset>
       <legend>Mutation</legend>
-      <div class="clearfix">
-        <label for="mutation-probability">Probability</label>
-        <div class="input">
+      <div class="control-group">
+        <label for="mutation-probability" class="control-label">Probability</label>
+        <div class="controls">
           <input type="number" name="mutation-probability" id="mutation-probability" min="0" max="100" step="0.01" placeholder="0.1" value="0.1">%
           <span class="help-block">For each base in a new organism's chromosome, what is the probability that a mutation to a different base will occur?</span>
         </div>
       </div>
-    </fieldset>
-    <div class="actions">
-      <input type="button" class="create btn primary" value="Create">
-    </div>
-
-    <div class="clearfix">
-      <label for="load-settings">Load Saved Settings...</label>
-      <div class="input">
-        <select id="load-settings">
-          <option value=""></option>
-          <% existingSettings.each(function (model) { %>
-          <option value="<%= model.id %>"><%= model.get('name') %></option>
-          <% }) %>
-        </select>
+      <div class="form-actions">
+        <input type="button" class="create btn btn-primary" value="Create">
       </div>
-    </div>
-    <div class="actions">
-      <input type="button" class="btn small load" value="Load">
-    </div>
+    </fieldset>
+
+    <fieldset>
+      <div class="control-group">
+        <label for="load-settings" class="control-label">Load Saved Settings...</label>
+        <div class="controls">
+          <select id="load-settings">
+            <option value=""></option>
+            <% existingSettings.each(function (model) { %>
+            <option value="<%= model.id %>"><%= model.get('name') %></option>
+            <% }) %>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <input type="button" class="btn btn-small btn-primary load" value="Load">
+      </div>
+    </fieldset>
   </form>
 </script>
 
@@ -138,10 +139,25 @@
   Fitness: <%= model.fitness() %>
 </script>
 
+<script type="text/template" id="help-view-template">
+  <div class="accordion" id="help-accordion">
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a href="#fitness" data-parent="#help-accordion" data-toggle="collapse" class="accordion-toggle">Fitness</a>
+      </div>
+      <div id="fitness" class="accordion-body collapse">
+        <div class="accordion-inner">
+          TODO Detailed fitness explanations, etc.
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
 <script type="text/template" id="population-settings-view-template">
-  <a class="btn" href="javascript:;" data-controls-modal="population-settings-modal" data-keyboard="true" data-backdrop="true">Settings</a>
-  <div id="population-settings-modal" class="modal fade hide">
-    <table>
+  <a class="btn" href="#population-settings-modal" data-toggle="modal">Settings</a>
+  <div id="population-settings-modal" class="modal fade hide" data-keyboard="true" data-backdrop="true">
+    <table class="table table-striped table-condensed">
       <tr id="size">
         <th scope="row">Starting Population</th>
         <td<% if ( settings.isDefault('size') ) { %> class="default"<% } %>><%= settings.escape('size') %></td>
@@ -182,10 +198,12 @@
       </tr>
     </table>
     <form>
-      <div class="actions">
-        <input type="button" class="btn save primary" value="Save">
-        <input type="button" class="btn reset" value="Reset population with these settings">
-      </div>
+      <fieldset>
+        <div class="form-actions">
+          <input type="button" class="btn save btn-primary" value="Save">
+          <input type="button" class="btn reset" value="Reset population with these settings">
+        </div>
+      </fieldset>
     </form>
   </div>
 </script>

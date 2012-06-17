@@ -24,8 +24,8 @@ jsGA.PopulationView = Backbone.View.extend(
         @template = _.template(options.template || $('#population-view-template').html())
 
     render: ->
-        $('.topbar .nav li').removeClass('active')
-        $('.topbar .nav a[href="#"]').parents('li').addClass('active')
+        $('.navbar .nav li').removeClass('active')
+        $('.navbar .nav a[href="#"]').parents('li').addClass('active')
         $(@el).html(@template())
         @renderOrganisms()
         settingsView = new jsGA.PopulationSettingsView({model: @collection.settings})

@@ -75,8 +75,8 @@ jsGA.CreatePopulationView = Backbone.View.extend(
         @$('select#load-settings').append('<option value="' + model.id + '">' + model.get('name') + '</option>')
 
     render: ->
-        $('.topbar .nav li').removeClass('active')
-        $('.topbar .nav a[href="#create"]').parents('li').addClass('active')
+        $('.navbar li').removeClass('active')
+        $('.navbar a[href="#create"]').parents('li').addClass('active')
         $(@el).html(@template({
             existingSettings: @existingSettings
         }))

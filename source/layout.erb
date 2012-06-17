@@ -9,39 +9,53 @@
   <meta name="author" content="John Weaver">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <%= stylesheet_link_tag "bootstrap.min.css" %>
-  <%= stylesheet_link_tag "site.css" %>
+  <%= stylesheet_link_tag "style.css" %>
   <%= javascript_include_tag('lib/modernizr-2.0.6.min') %>
   <%= yield_content :head %>
 </head>
   
 <body class="<%= page_classes %>">
-  <div class="topbar-wrapper" style="z-index: 5;">
-    <div class="topbar" data-dropdown="dropdown">
-      <div class="topbar-inner">
-        <div class="container">
-          <h3><a href="#">jsGA</a></h3>
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+
+        <a href="#" class="brand">jsGA</a>
+        <div class="nav-collapse">
           <ul class="nav">
             <li><a href="#">Current Generation</a></li>
-            <li><a href="#create">Create New Population</a></li>
+            <li><a href="#past">Past Generations</a></li>
+            <li><a href="#statistics">Statistics</a></li>
           </ul>
-        </div>
-      </div><!-- /topbar-inner -->
-    </div><!-- /topbar -->
+          <ul class="nav pull-right">
+            <li><a href="#create"><strong>Create New Population</strong></a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="#help">Help</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
   </div>
   <div id="container" class="container">
     <header>
 
     </header>
     <div id="content" class="row">
-      <div id="main" role="main" class="content span-two-thirds">
+      <div id="main" role="main" class="content span8">
         <%= yield %>
       </div>
-      <div id="side" role="complementary" class="sidebar span-one-third">
+      <div id="side" role="complementary" class="sidebar span4">
       </div>
     </div>
     <footer>
-     <span>Copyright &copy; 2012 John Weaver. All Rights Reserved</span>
+    <span>Copyright &copy; 2012 <a href="http://saebyn.info/">John Weaver</a>.<br>All Rights Reserved</span>
     </footer>
   </div> <!--! end of #container -->
     

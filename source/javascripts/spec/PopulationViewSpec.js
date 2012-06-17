@@ -187,7 +187,7 @@ describe('Population view', function () {
                 this.view.$('input.steps').val('');
                 this.view.$('.run').trigger('click');
                 expect(this.populationRunStub.called).toBeFalsy();
-                expect(this.view.$('.error').length).toEqual(1);
+                expect(this.view.$('.alert-error').length).toEqual(1);
             });
         });
 

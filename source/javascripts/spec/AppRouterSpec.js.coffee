@@ -8,9 +8,10 @@ describe('AppRouter', ->
 
         this.router = new jsGA.AppRouter()
         this.routeSpy = sinon.spy()
-        try {
+        try
             Backbone.history.start({silent:true, root: '/testrunner.html#'})
-        } catch(e) {}
+        catch error
+
         this.router.navigate('elsewhere')
 
         this.fetchStub = sinon.stub(this.collection, "fetch")
@@ -85,7 +86,7 @@ describe('AppRouter', ->
         )
 
         it('should send the user to the create pop handler if no population exists', ->
-            var spy = sinon.spy(this.router, 'navigate')
+            spy = sinon.spy(this.router, 'navigate')
             this.router.index()
             expect(spy).toHaveBeenCalledOnce()
             expect(spy).toHaveBeenCalledWith('create', true)
@@ -106,7 +107,7 @@ describe('AppRouter', ->
             this.router.createPopulation()
             expect(renderSpy).toHaveBeenCalled()
         )
-    });
+    )
 
     describe('View Organism handler', ->
         beforeEach(->

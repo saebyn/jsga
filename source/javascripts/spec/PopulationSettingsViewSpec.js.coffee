@@ -23,8 +23,8 @@ describe 'Population settings view', ->
             @view.render()
 
         it 'should have an anchor element with a button class that opens the settings modal', () ->
-            expect(@view.$('a.btn')).toHaveData('controls-modal', 'population-settings-modal')
-            expect(@view.$('a.btn')).toHaveText('Settings')
+            expect(@view.$('a.btn.settings')).toHaveData('toggle', 'modal')
+            expect(@view.$('a.btn.settings')).toHaveAttr('href', '#population-settings-modal')
 
         it 'should have a div element modal with an id of population-settings-modal', () ->
             expect(@view.$('div')).toHaveId('population-settings-modal')

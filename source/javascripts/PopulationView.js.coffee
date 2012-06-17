@@ -68,5 +68,5 @@ jsGA.PopulationView = Backbone.View.extend(
             @disableControls()
             @collection.run(steps)
         else
-            $(@el).prepend('<div class="alert-message error">Invalid number of steps <a class="close" href="javascript:">x</a></div>')
+            $(@el).prepend('<div class="alert alert-error"><button class="close" data-dismiss="alert">&times;</button> Invalid number of steps</div>')
 )

@@ -70,6 +70,7 @@ jsGA.PopulationView = Backbone.View.extend(
         @$('ol').html('')
 
         @updatePagination()
+        @$('#organism-count').text(@collection.length)
 
         @collection.chain()
             .rest(@index)

@@ -19,7 +19,7 @@ jsGA.HelpView = Backbone.View.extend(
         $(@el).html(@template())
         if @options.topic
             # expand this.options.topic
-            @$('#' + @options.topic).collapse('show')
+            @$('#' + @options.topic).addClass('in')
 
         this
 )

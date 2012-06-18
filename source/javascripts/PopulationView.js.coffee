@@ -9,13 +9,17 @@ jsGA.PopulationView = Backbone.View.extend(
     className: 'population'
 
     events:
-        'click input.step': 'step'
-        'click input.run': 'run'
-        'click input.stop': 'stop'
+        'click button.step': 'step'
+        'click button.run': 'run'
+        'click button.stop': 'stop'
+        'click .previous a': 'previousPage'
+        'click .next a': 'nextPage'
 
     initialize: (options) ->
         options or= {}
         _.bindAll(this)
+        @index = 0
+        @pageSize = 50
         @collection.bind('add', @renderOrganisms, this)
         @collection.bind('remove', @renderOrganisms, this)
         @collection.bind('change', @renderOrganisms, this)
@@ -32,9 +36,45 @@ jsGA.PopulationView = Backbone.View.extend(
         $(@el).append(settingsView.render().el)
         this
 
+    nextPage: ->
+        if @index + @pageSize < @collection.length
+            @index += @pageSize
+
+        @renderOrganisms()
+        return false
+
+    previousPage: ->
+        if @index - @pageSize >= 0
+            @index -= @pageSize
+
+        @renderOrganisms()
+        return false
+
+    updatePagination: ->
+        console.log @collection.length, @index, @pageSize
+        # get total count, update pagination link if count if over limit
+        if @collection.length - @index > @pageSize
+            @$('.pager .next').removeClass('disabled')
+        else
+            @$('.pager .next').addClass('disabled')
+
+        if @collection.length <= @pageSize or @index == 0
+            @$('.pager .previous').addClass('disabled')
+        else
+            @$('.pager .previous').removeClass('disabled')
+
+        if @index > @collection.length
+            @index = @collection.length - @pageSize
+
     renderOrganisms: ->
         @$('ol').html('')
-        @collection.each(@addOrganism, this)
+
+        @updatePagination()
+
+        @collection.chain()
+            .rest(@index)
+            .first(@pageSize)
+            .each(@addOrganism, this)
 
     updateSteps: (remaining) ->
         if remaining == 0 

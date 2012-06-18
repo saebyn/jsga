@@ -130,6 +130,10 @@ class jsGA.ChromosomeVisualization
         context.textBaseline = 'middle'
         context.textAlign = 'center'
         context.font = 'normal 13px "Helvetica Neue",Helvetica,Arial,sans-serif'
+        # TODO optimize
+        # This line consumes about 3% of the normal runtime of the app. If
+        # we could compute this once per organism type and cache it, that would
+        # make that unnecessary.
         minTextMetric = Math.min.apply(this, (context.measureText(baseText).width for baseText of @rawBases))
         for i in [0...cells.length]
             cell = cells[i]

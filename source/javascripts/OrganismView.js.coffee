@@ -23,7 +23,7 @@ jsGA.OrganismView = Backbone.View.extend(
             vis.addChromosome(@model.get('chromosome'), @model.get('bases'))
             vis.render()
         else
-            $(@el).html('<div class="alert-message error">Does not exist.</div>')
+            $(@el).html('<div class="alert alert-error">Does not exist.</div>')
 
         this
 

@@ -1,16 +1,24 @@
 <script type="text/template" id="population-view-template">
   <h1>Current Generation</h1>
   <ol class="organisms well"></ol>
+  <ul class="pager">
+    <li class="previous disabled">
+      <a href="#"><i class="icon-arrow-up"></i> Higher</a>
+    </li>
+    <li class="next disabled">
+      <a href="#">Lower <i class="icon-arrow-down"></i></a>
+    </li>
+  </ul>
   <div class="alert alert-block alert-info">
     Click an organism icon above to view its details.
   </div>
   <form>
     <fieldset>
       <div class="form-actions">
-        <input type="button" class="step btn btn-primary" value="Step">
-        <input type="button" class="run btn" value="Run for ...">
+              <button class="step btn btn-primary"><i class="icon-white icon-step-forward"></i> Step</button>
+        <button class="run btn"><i class="icon-play"></i> Run for ...</button>
         <input type="number" class="steps span2" placeholder="10" value="10"><span>steps</span>
-        <input type="button" class="stop btn btn-danger" value="Stop">
+        <button class="stop btn btn-danger"><i class="icon-stop"></i> Stop</button>
       </div>
     </fieldset>
   </form>
@@ -155,7 +163,7 @@
 </script>
 
 <script type="text/template" id="population-settings-view-template">
-  <a class="btn settings" href="#population-settings-modal" data-toggle="modal">Settings</a>
+  <a class="btn settings" href="#population-settings-modal" data-toggle="modal"><i class="icon-cog"></i> Settings</a>
   <div id="population-settings-modal" class="modal fade hide" data-keyboard="true" data-backdrop="true">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">×</button>

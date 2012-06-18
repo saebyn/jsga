@@ -2,8 +2,6 @@
 
 Now:
 
-* Add control to population view to limit the number of organisms displayed at once. (maybe have paging or smooth scroll through)
-
 * Keep a log of population activity in localstorage
 
   - which organisms reproduced

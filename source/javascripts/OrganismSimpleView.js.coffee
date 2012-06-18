@@ -15,6 +15,9 @@ jsGA.OrganismSimpleView = Backbone.View.extend(
     render: ->
         $(@el).text(JSON.stringify(@model.get('chromosome')))
         $(@el).attr('id', @model.cid)
+        # TODO build Viz prototype in population view for each organism type,
+        #      then give that prototype to the organism views and have them
+        #      extend it.
         vis = new jsGA.ChromosomeVisualization(@el)
         vis.addChromosome(this.model.get('chromosome'), @model.get('bases'))
         vis.render()

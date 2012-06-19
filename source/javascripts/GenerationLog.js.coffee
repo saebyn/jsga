@@ -9,7 +9,11 @@ jsGA = this.jsGA = this.jsGA || {}
 # has an id.
 jsGA.generationLog = (population, children) ->
     if population.id
-        generation = _.extend({population: population.toJSON()}, {parent: population.previousId})
+        simplePop = population.map((model) ->
+            _.pick(model.attributes, 'chromosome', 'type')
+        )
+        generation = {population: simplePop, parent: population.previousId}
+        # TODO if we start running out of space, do something about it
         window.sessionStorage[population.id] = JSON.stringify(generation)
-    
+
     population.reset(children)

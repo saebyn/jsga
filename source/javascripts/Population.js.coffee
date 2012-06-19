@@ -11,6 +11,8 @@ jsGA.Population = Backbone.Collection.extend(
         @bind('reset', ->
             @previousId = @id
             @id = _.uniqueId('p')
+            if not @firstId?
+                @firstId = @id
         , this)
 
         @settings = new jsGA.PopulationSettings

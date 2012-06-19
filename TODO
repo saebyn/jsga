@@ -2,15 +2,21 @@
 
 Now:
 
-* Keep a log of population activity in localstorage
+* Keep a log of population activity in session storage
 
   - which organisms reproduced
 
-  - which children the organism has each generation
+  - each organisms parents or that it survived from the previous generation
 
   - how many generations the organism lived
 
-  - which other organisms the organism bred with each generation to produce its children
+* Update backbone
+
+* Update README with new deps
+
+  - bootstrap alert and collapse
+
+* Write help page
 
 Sooner:
 
@@ -18,11 +24,29 @@ Sooner:
 
 * Generate population statistics from log
 
+* Multipoint crossover
+
+  - UI: how many points? distribution??
+
 Later:
 
-* Web workers?
+* Control random distributions (presets, manually specified by UI??) for various mechanisms
 
-* Update backbone.js and other deps
+* Adaptive mutation rates
+
+  - Functionally driven by overall chromosome features vs specific features
+
+  - Hotspots, base locus selection random distribution driven by separate GA (like chromosome hotspots)
+
+* Replay of generational sequences via using the same random seed, run it back to the same generation count - in background!
+
+* Genotype / Phenotype distinctions - grammar encoding: pg 72
+
+* Crossover hotspots - GA driven multipoint crossover point distribution selection
+
+* Add optional Sigma scaling of fitness
+
+* Web workers?
 
 * Allow mutiple chromosomes ( with different lengths and bases )
 

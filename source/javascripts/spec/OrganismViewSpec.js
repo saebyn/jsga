@@ -37,7 +37,7 @@ describe('Organism view', function () {
         it('should show an error message if model is false', function () {
             this.view.model = false;
             this.view.render();
-            expect($(this.view.el)).toContain('.alert-message.error');
+            expect($(this.view.el)).toContain('.alert.alert-error');
         });
     });
 });

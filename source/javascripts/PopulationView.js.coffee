@@ -19,7 +19,7 @@ jsGA.PopulationView = Backbone.View.extend(
         options or= {}
         _.bindAll(this)
         @index = 0
-        @pageSize = 50
+        @options.pageSize or= 50
         @collection.bind('add', @renderOrganisms, this)
         @collection.bind('remove', @renderOrganisms, this)
         @collection.bind('change', @renderOrganisms, this)
@@ -37,34 +37,33 @@ jsGA.PopulationView = Backbone.View.extend(
         this
 
     nextPage: ->
-        if @index + @pageSize < @collection.length
-            @index += @pageSize
+        if @index + @options.pageSize < @collection.length
+            @index += @options.pageSize
 
         @renderOrganisms()
         return false
 
     previousPage: ->
-        if @index - @pageSize >= 0
-            @index -= @pageSize
+        if @index - @options.pageSize >= 0
+            @index -= @options.pageSize
 
         @renderOrganisms()
         return false
 
     updatePagination: ->
-        console.log @collection.length, @index, @pageSize
         # get total count, update pagination link if count if over limit
-        if @collection.length - @index > @pageSize
+        if @collection.length - @index > @options.pageSize
             @$('.pager .next').removeClass('disabled')
         else
             @$('.pager .next').addClass('disabled')
 
-        if @collection.length <= @pageSize or @index == 0
+        if @collection.length <= @options.pageSize or @index == 0
             @$('.pager .previous').addClass('disabled')
         else
             @$('.pager .previous').removeClass('disabled')
 
         if @index > @collection.length
-            @index = @collection.length - @pageSize
+            @index = @collection.length - @options.pageSize
 
     renderOrganisms: ->
         @$('ol').html('')
@@ -74,7 +73,7 @@ jsGA.PopulationView = Backbone.View.extend(
 
         @collection.chain()
             .rest(@index)
-            .first(@pageSize)
+            .first(@options.pageSize)
             .each(@addOrganism, this)
 
     updateSteps: (remaining) ->
@@ -90,10 +89,10 @@ jsGA.PopulationView = Backbone.View.extend(
         @$('ol').append(view.render().el)
 
     enableControls: ->
-        @$('input.step, input.run').prop('disabled', false)
+        @$('button.step, button.run').prop('disabled', false)
 
     disableControls: ->
-        @$('input.step, input.run').prop('disabled', true)
+        @$('button.step, button.run').prop('disabled', true)
 
     step: ->
         @disableControls()

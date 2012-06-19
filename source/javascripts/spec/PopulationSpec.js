@@ -22,11 +22,11 @@ describe('The Population collection', function () {
 
         it('should create a model for each organism', function () {
             var eventSpy = sinon.spy();
-            this.population.bind('add', eventSpy);
+            this.population.bind('reset', eventSpy);
 
             this.population.seed(this.populationSettings);
             
-            expect(eventSpy.callCount).toEqual(20);
+            expect(eventSpy.callCount).toEqual(1);
         });
 
         it('should not create the selector specified in the settings if one is provided', function () {

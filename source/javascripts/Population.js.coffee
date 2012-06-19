@@ -6,7 +6,13 @@ jsGA = this.jsGA = this.jsGA || {}
 jsGA.Population = Backbone.Collection.extend(
     initialize: (models, options) ->
         @options = options || {}
-        
+
+        # Every time the population is reset, give it a new id.
+        @bind('reset', ->
+            @previousId = @id
+            @id = _.uniqueId('p')
+        , this)
+
         @settings = new jsGA.PopulationSettings
         @updateSelector(@settings.get('selectionMechanism'))
         @model = @options.model || jsGA.Organism
@@ -38,7 +44,7 @@ jsGA.Population = Backbone.Collection.extend(
         # Override the default options with any that were passed in.
         options = _.extend(defaultOptions, options)
 
-        @add(options) for i in [0...options.size]
+        jsGA.generationLog(this, options for i in [0...options.size])
 
     #
     # run
@@ -81,7 +87,7 @@ jsGA.Population = Backbone.Collection.extend(
             # Now we need two less organisms that we did before.
             newOrganismsNeeded -= 2
 
-        @reset(newOrganisms)
+        jsGA.generationLog(this, newOrganisms)
 
     totalFitness: () ->
         @reduce((memo, organism) ->

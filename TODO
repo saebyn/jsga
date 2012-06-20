@@ -4,17 +4,13 @@ Now:
 
 * Keep a log of population activity in session storage
 
-  - which organisms reproduced
-
   - each organisms parents or that it survived from the previous generation
 
   - how many generations the organism lived
 
 * Update backbone
 
-* Update README with new deps
-
-  - bootstrap alert and collapse
+  - Update README with new deps
 
 * Write help page
 
@@ -23,6 +19,8 @@ Sooner:
 * Allow the user to view the log of population activity related to a specific organism
 
 * Generate population statistics from log
+
+* Show alert when population log gets too big.
 
 * Multipoint crossover
 

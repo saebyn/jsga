@@ -10,7 +10,11 @@ jsGA = this.jsGA = this.jsGA || {}
 jsGA.generationLog = (population, children) ->
     if population.id
         simplePop = population.map((model) ->
-            _.pick(model.attributes, 'chromosome', 'type')
+            cid: model.cid
+            parents: model.get('parents')
+            life: model.get('life')
+            chromosome: model.get('chromosome')
+            type: model.get('type')
         )
         generation = {population: simplePop, parent: population.previousId}
         # TODO if we start running out of space, do something about it

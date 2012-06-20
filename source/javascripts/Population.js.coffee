@@ -89,6 +89,10 @@ jsGA.Population = Backbone.Collection.extend(
             # Now we need two less organisms that we did before.
             newOrganismsNeeded -= 2
 
+        _.each(newOrganisms, (organism) ->
+            organism.set({life: organism.get('life') + 1})
+        )
+
         jsGA.generationLog(this, newOrganisms)
 
     totalFitness: () ->

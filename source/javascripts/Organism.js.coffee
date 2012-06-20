@@ -7,6 +7,8 @@ jsGA = this.jsGA = this.jsGA || {}
 jsGA.Organism = Backbone.Model.extend(
     defaults:
         type: 'base'
+        parents: []
+        life: 0
 
     initialize: (options) ->
         if not @has('chromosome')
@@ -42,6 +44,7 @@ jsGA.Organism = Backbone.Model.extend(
     clone: ->
         clone = Backbone.Model.prototype.clone.apply(this)
         clone.unset('id', {silent: true})
+        clone.set({parents: [@cid], life: 0})
         clone
 
     #
@@ -63,7 +66,7 @@ jsGA.Organism = Backbone.Model.extend(
         mutationOccurred = false
 
         for locus in [0...chromosome.length]
-            if Math.random() < @get('mutationProbability')
+            if Math.random() < (@get('mutationProbability') / 100.0)
                 chromosome[locus] = @_randomBase()
                 mutationOccurred = true
 
@@ -102,7 +105,7 @@ jsGA.Organism = Backbone.Model.extend(
     # organism.
     #
     crossover: (otherOrganism) ->
-        if Math.random() < @get('crossoverProbability')
+        if Math.random() < (@get('crossoverProbability') / 100.0)
             # Get the length of the shorter of the two chromosomes to be
             # crossed-over.
             chromosomeLength = Math.min(@get('chromosome').length,
@@ -118,6 +121,8 @@ jsGA.Organism = Backbone.Model.extend(
                 .concat(@get('chromosome').slice(locus))
 
             attrs = @toJSON()
+            attrs.parents = [this.cid, otherOrganism.cid]
+            attrs.life = 0
             return [new jsGA.Organism(_.extend(attrs, {chromosome: childOneChromosome})),
                     new jsGA.Organism(_.extend(attrs, {chromosome: childTwoChromosome}))]
         else

@@ -2,12 +2,6 @@
 
 Now:
 
-* Keep a log of population activity in session storage
-
-  - each organisms parents or that it survived from the previous generation
-
-  - how many generations the organism lived
-
 * Update backbone
 
   - Update README with new deps

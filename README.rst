@@ -12,7 +12,7 @@ The source files included in this repository are licensed under the MIT license 
 Dependencies
 ------------
 
-Backbone.js_ 0.5.3 -> source/javascripts/lib/backbone.js
+Backbone.js_ 0.9.2 -> source/javascripts/lib/backbone.js
 
 Backbone.localStorage_ 1.0 -> source/javascripts/lib/backbone.localStorage.js
 

@@ -27,7 +27,10 @@ jsGA.CreatePopulationView = Backbone.View.extend(
     loadSavedSettings: ->
         id = @$('#load-settings').val()
         if id
-            @model.set(@existingSettings.get(id).toJSON())
+            @model.set(@existingSettings.get(id).toJSON(), {silent: true})
+            @model.unset('name', {silent: true})
+            @model.unset('id', {silent: true})
+            @model.change()
 
     clearFormError: (selector) ->
         @$('.alert-message.error').fadeOut()

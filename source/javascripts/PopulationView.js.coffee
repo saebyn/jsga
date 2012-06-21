@@ -125,10 +125,12 @@ jsGA.PopulationView = BasePopulationView.extend(
     step: ->
         @disableControls()
         @collection.run()
+        false
 
     stop: ->
         @enableControls()
         @collection.stop()
+        false
 
     run: ->
         steps = parseInt(@$('input.steps').val(), 10)
@@ -137,4 +139,6 @@ jsGA.PopulationView = BasePopulationView.extend(
             @collection.run(steps)
         else
             $(@el).prepend('<div class="alert alert-error"><button class="close" data-dismiss="alert">&times;</button> Invalid number of steps</div>')
+
+        false
 )

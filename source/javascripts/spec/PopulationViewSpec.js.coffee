@@ -100,11 +100,11 @@ describe('Population view', ->
             expect(@simpleOrganismViewStub)
                 .toHaveBeenCalledThrice()
             expect(@simpleOrganismViewStub)
-                .toHaveBeenCalledWith({model: @organism1})
+                .toHaveBeenCalledWith({model: @organism1, generationId: undefined})
             expect(@simpleOrganismViewStub)
-                .toHaveBeenCalledWith({model: @organism2})
+                .toHaveBeenCalledWith({model: @organism2, generationId: undefined})
             expect(@simpleOrganismViewStub)
-                .toHaveBeenCalledWith({model: @organism3})
+                .toHaveBeenCalledWith({model: @organism3, generationId: undefined})
         )
 
         it('should append the OrganismSimpleView to the list', ->

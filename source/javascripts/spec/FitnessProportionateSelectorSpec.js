@@ -20,7 +20,7 @@ describe('The FitnessProportionateSelector', function () {
     });
 
     it('should return the least fit organism', function () {
-        this.randomStub.returns(0.9);
+        this.randomStub.returns(0.9999999999);
         var pair = this.selector.choose(this.population);
         expect(pair[0].fitness()).toEqual(this.population.at(3).fitness());
         expect(pair[1].fitness()).toEqual(this.population.at(3).fitness());

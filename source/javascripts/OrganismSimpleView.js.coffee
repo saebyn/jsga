@@ -9,7 +9,7 @@ jsGA.OrganismSimpleView = Backbone.View.extend(
     events:
         'click': 'showDetails'
 
-    initialize: ->
+    initialize: (options) ->
         _.bindAll(this, 'showDetails')
 
     render: ->
@@ -24,5 +24,8 @@ jsGA.OrganismSimpleView = Backbone.View.extend(
         this
 
     showDetails: ->
-        window.router.navigate('organism/' + @model.cid, true)
+        if @options.generationId
+            window.router.navigate('past/' + @options.generationId + '/organism/' + @model.cid, true)
+        else
+            window.router.navigate('organism/' + @model.cid, true)
 )

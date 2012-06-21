@@ -15,9 +15,24 @@ jsGA.generationLog = (population, children) ->
             life: model.get('life')
             chromosome: model.get('chromosome')
             type: model.get('type')
+            fitness: model.fitness()
         )
         generation = {population: simplePop, parent: population.previousId}
         # TODO if we start running out of space, do something about it
         window.sessionStorage[population.id] = JSON.stringify(generation)
 
     population.reset(children)
+
+
+jsGA.getOrganismFromLog = (currentPopulation, generation, id) ->
+    json = window.sessionStorage[generation]
+
+    if json
+        population = JSON.parse(json).population
+        attrs = _.find(population, (o) -> o.cid == id)
+        if attrs
+            attrs.bases = currentPopulation.getAvailableBasesForOrganism(attrs.type)
+            organism = new jsGA.Organism(attrs)
+            organism._fitness = attrs.fitness
+            organism.cid = id
+            organism

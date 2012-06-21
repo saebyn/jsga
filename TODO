@@ -2,23 +2,19 @@
 
 Now:
 
-* Update backbone
-
-  - Update README with new deps
-
-* Write help page
-
-Sooner:
-
-* Allow the user to view the log of population activity related to a specific organism
-
 * Generate population statistics from log
 
+  - Like what?
+
 * Show alert when population log gets too big.
+
+Sooner:
 
 * Multipoint crossover
 
   - UI: how many points? distribution??
+
+* Replay of generational sequences via using the same random seed, run it back to the same generation count - in background!
 
 Later:
 
@@ -30,9 +26,9 @@ Later:
 
   - Hotspots, base locus selection random distribution driven by separate GA (like chromosome hotspots)
 
-* Replay of generational sequences via using the same random seed, run it back to the same generation count - in background!
-
 * Genotype / Phenotype distinctions - grammar encoding: pg 72
+
+* Write help page
 
 * Crossover hotspots - GA driven multipoint crossover point distribution selection
 

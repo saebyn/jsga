@@ -1,3 +1,16 @@
+<script type="text/template" id="population-simple-view-template">
+  <span class="label"><%= generation %></span>
+  <ol class="organisms well"></ol>
+  <ul class="pager">
+    <li class="disabled">
+      <a href="#" class="higher" title="Higher Fitness"><i class="icon-arrow-left"></i></a>
+    </li>
+    <li class="disabled">
+      <a href="#" class="lower" title="Lower Fitness"><i class="icon-arrow-right"></i></a>
+    </li>
+  </ul>
+</script>
+
 <script type="text/template" id="population-view-template">
   <h1>Current Generation <span class="label label-info"><span id="organism-count">0</span> Organisms</span></h1>
   <ol class="organisms well"></ol>

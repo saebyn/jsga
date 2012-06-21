@@ -28,6 +28,14 @@ jsGA.Population = Backbone.Collection.extend(
         -organism.fitness()
 
     #
+    # getAvailableBasesForOrganism
+    #
+    # Get an array of available chromosome bases for the organism type.
+    #
+    getAvailableBasesForOrganism: (type) ->
+        @settings.get('bases')
+
+    #
     # seed
     #
     # Add organisms to the population.

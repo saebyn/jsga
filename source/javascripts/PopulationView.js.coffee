@@ -5,7 +5,77 @@
 jsGA = this.jsGA = this.jsGA || {}
 
 
-jsGA.PopulationView = Backbone.View.extend(
+BasePopulationView = Backbone.View.extend(
+    nextPage: ->
+        if @index + @options.pageSize < @collection.length
+            @index += @options.pageSize
+
+        @renderOrganisms()
+        return false
+
+    previousPage: ->
+        if @index - @options.pageSize >= 0
+            @index -= @options.pageSize
+
+        @renderOrganisms()
+        return false
+
+    updatePagination: ->
+        # get total count, update pagination link if count if over limit
+        if @collection.length - @index > @options.pageSize
+            @$('.pager li:last').removeClass('disabled')
+        else
+            @$('.pager li:last').addClass('disabled')
+
+        if @collection.length <= @options.pageSize or @index == 0
+            @$('.pager li:first').addClass('disabled')
+        else
+            @$('.pager li:first').removeClass('disabled')
+
+        if @index > @collection.length
+            @index = @collection.length - @options.pageSize
+
+    addOrganism: (organism) ->
+        view = new jsGA.OrganismSimpleView(
+            model: organism
+            generationId: @options.generationId
+        )
+        @$('ol').append(view.render().el)
+
+    renderOrganisms: ->
+        @$('ol').html('')
+
+        @updatePagination()
+        @collection.chain()
+            .rest(@index)
+            .first(@options.pageSize)
+            .each(@addOrganism, this)
+)
+
+
+jsGA.PopulationSimpleView = BasePopulationView.extend(
+    className: 'population simple'
+    tagName: 'li'
+
+    events:
+        'click .pager a.higher': 'previousPage'
+        'click .pager a.lower': 'nextPage'
+
+    initialize: (options) ->
+        options or= {}
+        @index = 0
+        @options.pageSize or= 50
+        @template = _.template(options.template || $('#population-simple-view-template').html())
+        @render()
+
+    render: ->
+        @$el.html(@template(@options))
+        @renderOrganisms()
+        this
+)
+
+
+jsGA.PopulationView = BasePopulationView.extend(
     className: 'population'
 
     events:
@@ -36,57 +106,15 @@ jsGA.PopulationView = Backbone.View.extend(
         $(@el).append(settingsView.render().el)
         this
 
-    nextPage: ->
-        if @index + @options.pageSize < @collection.length
-            @index += @options.pageSize
-
-        @renderOrganisms()
-        return false
-
-    previousPage: ->
-        if @index - @options.pageSize >= 0
-            @index -= @options.pageSize
-
-        @renderOrganisms()
-        return false
-
-    updatePagination: ->
-        # get total count, update pagination link if count if over limit
-        if @collection.length - @index > @options.pageSize
-            @$('.pager .next').removeClass('disabled')
-        else
-            @$('.pager .next').addClass('disabled')
-
-        if @collection.length <= @options.pageSize or @index == 0
-            @$('.pager .previous').addClass('disabled')
-        else
-            @$('.pager .previous').removeClass('disabled')
-
-        if @index > @collection.length
-            @index = @collection.length - @options.pageSize
-
     renderOrganisms: ->
-        @$('ol').html('')
-
-        @updatePagination()
+        BasePopulationView.prototype.renderOrganisms.apply(this)
         @$('#organism-count').text(@collection.length)
-
-        @collection.chain()
-            .rest(@index)
-            .first(@options.pageSize)
-            .each(@addOrganism, this)
 
     updateSteps: (remaining) ->
         if remaining == 0 
             @enableControls()
 
         @$('input.steps').val(remaining)
-
-    addOrganism: (organism) ->
-        view = new jsGA.OrganismSimpleView({
-            model: organism
-        })
-        @$('ol').append(view.render().el)
 
     enableControls: ->
         @$('button.step, button.run').prop('disabled', false)

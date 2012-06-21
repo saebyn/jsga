@@ -28,6 +28,8 @@ Underscore_ 1.3.3 -> source/javascripts/lib/underscore.js
 
 Modernizr_ 2.0.6 (All core tests, html5shiv, yepnope, respond.js) -> source/javascripts/lib/modernizr-2.0.6.min.js
 
+d3_ 2.9.4 -> source/javascripts/lib/d3.v2.js
+
 BDD spec dependencies
 +++++++++++++++++++++
 
@@ -52,3 +54,4 @@ Jasmine-sinon_ -> source/javascripts/lib/jasmine-sinon.js
 .. _Jasmine-sinon: https://github.com/froots/jasmine-sinon
 .. _Sinon.JS: http://sinonjs.org/
 .. _Jasmine: http://pivotal.github.com/jasmine/
+.. _d3: https://github.com/mbostock/d3

@@ -37,9 +37,9 @@ jsGA.PopulationSettingsView = Backbone.View.extend(
         if name
             @model.save({name: name},
                 error: =>
-                    $('#main').prepend('<div class="alert-message error">Failed to save settings <a href="javascript:;" class="close">X</a></div>')
+                    $('#main').prepend('<div class="alert alert-error"><button class="close" data-dismiss="alert">&times;</button> Failed to save settings</div>')
                 success: =>
-                    $('#main').prepend('<div class="alert-message success">Settings saved <a href="javascript:;" class="close">X</a></div>')
+                    $('#main').prepend('<div class="alert alert-success"><button class="close" data-dismiss="alert">&times;</button> Settings saved</div>')
             )
 
 )

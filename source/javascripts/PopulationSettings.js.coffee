@@ -17,7 +17,7 @@ jsGA.PopulationSettings = Backbone.Model.extend(
         elitism: 0.0
         crossoverProbability: 70.0
         mutationProbability: 0.1
-        fitness: "return _.reduce(this.get('chromosome'), function(memo, num){ return memo + num; }, 0);"
+        fitness: "return _.reduce(this.get('chromosome'), function(memo, num){ return memo + num; }, 0) / this.get('chromosome').length;"
         bases: [0, 1]
         chromosomeLength: 10
 

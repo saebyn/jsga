@@ -20,6 +20,7 @@ jsGA.generationLog = (population, children) ->
         generation = {population: simplePop, parent: population.previousId}
         # TODO if we start running out of space, do something about it
         window.sessionStorage[population.id] = JSON.stringify(generation)
+        population.trigger('genlog')
 
     population.reset(children)
 

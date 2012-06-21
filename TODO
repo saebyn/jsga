@@ -4,7 +4,11 @@ Now:
 
 * Generate population statistics from log
 
-  - Like what?
+  - genotype cooccurance (http://bost.ocks.org/mike/miserables/)
+
+    - for each given chromosome base how often does it appear with another in the same organism
+
+    - filterable by generation range, fitness range 
 
 * Show alert when population log gets too big.
 

@@ -4,6 +4,7 @@
   <title>Jasmine Spec Runner: jsGA</title>
   <%= javascript_include_tag(['lib/underscore',
                              'lib/json2',
+                             'lib/d3.v2',
                              'lib/backbone',
                              'lib/backbone.localStorage',
                              'lib/bootstrap-modal',
@@ -33,6 +34,7 @@
                              'GenerationLogView',
                              'PopulationSettingsView',
                              'HelpView',
+                             'StatisticsView',
                              'Init'], :defer => 'defer') %>
 
   <script type="text/javascript" src="/javascripts/spec/PopulationSpec.js"></script>
@@ -49,6 +51,7 @@
   <script type="text/javascript" src="/javascripts/spec/GenerationLogViewSpec.js"></script>
   <script type="text/javascript" src="/javascripts/spec/ChromosomeVisualizationSpec.js"></script>
   <script type="text/javascript" src="/javascripts/spec/PopulationSettingsViewSpec.js"></script>
+  <script type="text/javascript" src="/javascripts/spec/StatisticsViewSpec.js"></script>
 
   <script defer type="text/javascript">
     $(document).ready(function() {

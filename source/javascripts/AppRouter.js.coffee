@@ -60,9 +60,10 @@ jsGA.AppRouter = Backbone.Router.extend(
         $('#main').html(logView.render().el)
         $('#side').html('')
 
-
     viewStatistics: ->
-        # TODO figure out what to show here
+        statView = new jsGA.StatisticsView({population: @population})
+        $('#main').html(statView.render().el)
+        $('#side').html('')
 
     viewPastOrganism: (generationId, id) ->
         @organismView = new jsGA.OrganismView(

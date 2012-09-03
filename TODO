@@ -2,27 +2,39 @@
 
 Now:
 
-* Generate population statistics from log
+* Fix up creation form and build some sample experiments to be preloaded
 
-  - genotype cooccurance (http://bost.ocks.org/mike/miserables/)
+  - write explaination of pd
 
-    - for each given chromosome base how often does it appear with another in the same organism
+* Allow the user to set the random seed during creation
 
-    - filterable by generation range, fitness range 
+  - Fix specs that rely on mocking random to instead use seed
 
-* Show alert when population log gets too big.
 
 Sooner:
+
+* Consider making counts in cooccurance graph displayed in a logarithmic scale
 
 * Multipoint crossover
 
   - UI: how many points? distribution??
 
-* Replay of generational sequences via using the same random seed, run it back to the same generation count - in background!
+* Generate population statistics from log
+
+  - allele cooccurance (http://bost.ocks.org/mike/miserables/)
+
+    - do cluster analysis
+
+    - filterable by generation range, fitness range 
+
+* Show alert when population log gets too big.
+
 
 Later:
 
 * Control random distributions (presets, manually specified by UI??) for various mechanisms
+
+* Crossover hotspots - GA driven multipoint crossover point distribution selection
 
 * Adaptive mutation rates
 
@@ -30,15 +42,21 @@ Later:
 
   - Hotspots, base locus selection random distribution driven by separate GA (like chromosome hotspots)
 
-* Genotype / Phenotype distinctions - grammar encoding: pg 72
+* Genotype / Phenotype distinctions
+  
+  - grammar encoding: pg 72
+
+  - gray coded integers in chromosome bitstring
 
 * Write help page
-
-* Crossover hotspots - GA driven multipoint crossover point distribution selection
 
 * Add optional Sigma scaling of fitness
 
 * Web workers?
+
+  - statistics aggregation for graphs
+
+  - fitness function evaluations
 
 * Allow mutiple chromosomes ( with different lengths and bases )
 

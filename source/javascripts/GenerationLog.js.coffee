@@ -37,3 +37,24 @@ jsGA.getOrganismFromLog = (currentPopulation, generation, id) ->
             organism._fitness = attrs.fitness
             organism.cid = id
             organism
+
+
+jsGA.visitGenerations = (population, callback) ->
+    previousId = population.previousId
+    # Loop over all generations, starting with the one immediately
+    # before the current population, until either no previous generation
+    # exists or is no longer in the session storage.
+    while previousId != null
+        # grab the generation from session storage with previousId
+        json = window.sessionStorage[previousId]
+        # if generation lookup fails, break the loop
+        if json is undefined
+            break
+
+        generation = JSON.parse(json)
+
+        if generation and generation.population.length > 0
+            callback(generation.population)
+
+        # find the id of the generation prior to the fetched one
+        previousId = generation.parent

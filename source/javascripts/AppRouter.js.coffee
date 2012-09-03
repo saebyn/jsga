@@ -26,7 +26,7 @@ jsGA.AppRouter = Backbone.Router.extend(
         'help/:topic': 'viewHelp'
         'help': 'viewHelp'
           
-    initialize: (optioins) ->
+    initialize: (options) ->
         @population = new jsGA.Population()
 
     index: ->
@@ -38,7 +38,9 @@ jsGA.AppRouter = Backbone.Router.extend(
             @navigate('create', true)
             return
 
-        this.populationView = new jsGA.PopulationView(
+        # Disconnect generational log events from any previous views.
+        @population.unbind 'genlog'
+        @populationView = new jsGA.PopulationView(
             collection: @population
         )
         $('#main').html(@populationView.render().el)

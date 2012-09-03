@@ -10,6 +10,7 @@ jsGA.CreatePopulationView = Backbone.View.extend(
         'change #selection-elitism-enabled': 'toggleElitism'
         'change #selection-mechanism': 'updateMechanismOptions'
         'click .load': 'loadSavedSettings'
+        'click .demo-choice': 'loadDemo'
 
     tagName: 'div'
 
@@ -23,6 +24,28 @@ jsGA.CreatePopulationView = Backbone.View.extend(
         @existingSettings.bind('add', @addSetting)
         @existingSettings.fetch()
         @template = _.template(options.template || $('#population-create-template').html())
+
+    loadDemo: ->
+        # Find selected demo radio and
+        # load settings from input data- attributes.
+        demoSettings = _(@$('.demo-choice:checked').data()).clone()
+
+        # base64 decode fitness function source
+        if 'fitness' of demoSettings
+            demoSettings.fitness = Base64.decode(demoSettings.fitness)
+
+        # Fix any case issues
+        caseConversions = ['chromosomeLength', 'crossoverProbability',
+                           'mutationProbability', 'selectionMechanism']
+
+        # Note that having keys with undefined values breaks @model.set(),
+        # causing the form to not update.
+        for cc in caseConversions
+            if cc.toLowerCase() of demoSettings
+                demoSettings[cc] = demoSettings[cc.toLowerCase()]
+                delete demoSettings[cc.toLowerCase()]
+
+        @model.set(demoSettings)
 
     loadSavedSettings: ->
         id = @$('#load-settings').val()

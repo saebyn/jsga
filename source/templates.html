@@ -1,8 +1,24 @@
+<script type="text/template" id="allele-cooccurance-graph-controls-template">
+    <label>Order: 
+      <select id="allele-ordering">
+        <option value="name">Name</option>
+        <option value="count">Count</option>
+        <option value="group">Group</option>
+      </select>
+    </label>
+</script>
+
 <script type="text/template" id="statistics-view-template">
   <h1>Statistics</h1>
 
   <h2>Mean Fitness</h2>
   <div id="fitness-chart"></div>
+
+  <h2>Allele Co-occurance <small>Grouping has not been implemented yet.</small></h2>
+  <div id="allele-cooccurance-graph"></div>
+
+  <h2>Fitness Distribution</h2>
+  <div id="fitness-distribution-graph"></div>
 </script>
 
 <script type="text/template" id="population-simple-view-template">
@@ -46,116 +62,147 @@
 
 <script type="text/template" id="population-create-template">
   <h1>Create New Population</h1>
-  <form class="form-horizontal">
-    <fieldset>
-    <div class="control-group">
-      <label for="population-size" class="control-label">Starting Population</label>
-      <div class="controls">
-        <input type="number" id="population-size" name="population-size" class="size span2" placeholder="20" value="20" min="2" max="250" step="1.0">
-        <span class="help-block">How many organisms should be seeded into the first generation?</span>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <label for="fitness-function" class="control-label">Fitness Function</label>
-      <div class="controls">
-        <textarea id="fitness-function" name="fitness-function" rows="8" class="xxlarge"></textarea>
-        <span class="help-block">This should be a Javascript code block that returns the calculated fitness for a given organism. [<a href="#help/fitness">more</a>]</span>
-      </div>
-    </div>
-
-    <fieldset>
-      <legend>Chromosome</legend>
-
-      <div class="control-group">
-        <label for="chromosome-length" class="control-label">Length</label>
+  <form class="form-horizontal accordian" id="creation-form-accordian">
+    <fieldset class="accordian-group">
+      <legend class="accordian-heading">
+        <a href="#demo-presets" class="accordian-toggle" data-toggle="collapse" data-parent="#creation-form-accordian">Quick Start Demos</a>
+      </legend>
+      <div class="accordian-body collapse in" id="demo-presets">
         <div class="controls">
-          <input type="number" id="chromosome-length" name="chromosome-length" class="span2" placeholder="10" value="10" min="1" max="1000" step="1">
-          <span class="help-block">How many bases should each organism's chromosome have?</span>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label id="chromosome-bases" class="control-label">Bases</label>
-        <div class="controls">
-          <label class="radio">
-            <input type="radio" name="chromosome-bases" value="binary" checked="checked">
-            Binary - the chromosome will be a bitstring
+          <label class="radio inline">
+            <input type="radio" class="demo-choice" data-chromosomeLength="70" data-fitness="CnZhciBjaG9pY2VzID0gWwogICAgWzMsIDBdLAogICAgWzUsIDFdCl07CgpmdW5jdGlvbiBnZXRJbmRleEZyb21HYW1lSGlzdG9yeShoaXN0b3J5KSB7CiAgICB2YXIgbGVuID0gaGlzdG9yeS5sZW5ndGg7CgogICAgLy92YXIgaW5kZXggPSAwOwogICAgLy9mb3IgKCB2YXIgZGlnaXRJbmRleCA9IDAgOyBkaWdpdEluZGV4IDwgNiA7IGRpZ2l0SW5kZXgrKyApIHsKICAgIC8vICAgIGluZGV4IHw9IGhpc3RvcnlbaGlzdG9yeS5sZW5ndGggLSBkaWdpdEluZGV4IC0gMV0gPDwgZGlnaXRJbmRleAogICAgLy99CiAgICAvL3JldHVybiBpbmRleDsKCiAgICByZXR1cm4gaGlzdG9yeVtsZW4gLSAxXSB8IGhpc3RvcnlbbGVuIC0gMl0gPDwgMSB8IGhpc3RvcnlbbGVuIC0gM10gPDwgMiB8IGhpc3RvcnlbbGVuIC0gNF0gPDwgMyB8IGhpc3RvcnlbbGVuIC0gNV0gPDwgNCB8IGhpc3RvcnlbbGVuIC0gNl0gPDwgNTsKfQoKZnVuY3Rpb24gZ2FtZShwbGF5ZXIxU3RyYXRlZ3ksIHBsYXllcjFHYW1lSGlzdG9yeSwgcGxheWVyMlN0cmF0ZWd5LCBwbGF5ZXIyR2FtZUhpc3RvcnksIGdhbWVDb3VudCkgewogICAgdmFyIHNjb3JlID0gMDsKICAgIHZhciBwbGF5ZXIxQ2hvaWNlLCBwbGF5ZXIyQ2hvaWNlOwoKICAgIGZvciAoIHZhciBnYW1lID0gMCA7IGdhbWUgPCBnYW1lQ291bnQgOyBnYW1lKysgKSB7CiAgICAgICAgcGxheWVyMUNob2ljZSA9IHBsYXllcjFTdHJhdGVneVtnZXRJbmRleEZyb21HYW1lSGlzdG9yeShwbGF5ZXIxR2FtZUhpc3RvcnkpXTsKICAgICAgICBwbGF5ZXIyQ2hvaWNlID0gcGxheWVyMlN0cmF0ZWd5W2dldEluZGV4RnJvbUdhbWVIaXN0b3J5KHBsYXllcjJHYW1lSGlzdG9yeSldOwogICAgICAgIHNjb3JlICs9IGNob2ljZXNbcGxheWVyMUNob2ljZV1bcGxheWVyMkNob2ljZV07CiAgICAgICAgcGxheWVyMUdhbWVIaXN0b3J5W3BsYXllcjFHYW1lSGlzdG9yeS5sZW5ndGhdID0gcGxheWVyMUNob2ljZTsKICAgICAgICBwbGF5ZXIyR2FtZUhpc3RvcnlbcGxheWVyMkdhbWVIaXN0b3J5Lmxlbmd0aF0gPSBwbGF5ZXIyQ2hvaWNlOwogICAgfQoKICAgIC8vIFByZXZlbnQgZGl2aWRlIGJ5IHplcm8uIE5vIGdhbWVzLCBzbyBubyBmaXRuZXNzLgogICAgaWYgKCBnYW1lID09IDAgKSB7CiAgICAgICAgcmV0dXJuIDAuMDsKICAgIH0KCiAgICAvLyBSZXR1cm4gYXZlcmFnZSBvdmVyIGFsbCBnYW1lcyBwbGF5ZWQuCiAgICByZXR1cm4gc2NvcmUgLyBnYW1lQ291bnQ7Cn0KCmZ1bmN0aW9uIGZpdG5lc3MoY2hyb21vc29tZSwgZ2FtZUNvdW50KSB7CiAgICB2YXIgc3RhdGljU3RyYXRlZ2llcyA9IFsKICAgICAgICBbMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMSwgMCwgMCwgMCwgMCwgMCwgMF0KICAgIF07CiAgICB2YXIgc2NvcmUgPSAwOwoKICAgIF8oc3RhdGljU3RyYXRlZ2llcykuZWFjaChmdW5jdGlvbiAoc3RyYXRlZ3kpIHsKICAgICAgICBzY29yZSArPSBnYW1lKGNocm9tb3NvbWUuc2xpY2UoMCwgNjQpLCBjaHJvbW9zb21lLnNsaWNlKDY0KSwgc3RyYXRlZ3kuc2xpY2UoMCwgNjQpLCBzdHJhdGVneS5zbGljZSg2NCksIGdhbWVDb3VudCk7CiAgICB9KTsKCiAgICAvLyBBdmVyYWdlIHNjb3JlIHBlciBnYW1lLCBub3JtYWxpemVkIHRvIFswLCAxXQogICAgcmV0dXJuIHNjb3JlIC8gc3RhdGljU3RyYXRlZ2llcy5sZW5ndGggLyA1LjA7Cn0KCnJldHVybiBmaXRuZXNzKHRoaXMuZ2V0KCdjaHJvbW9zb21lJyksIDMwKTsK">
+            Prisoner's Dilemma
           </label>
         </div>
       </div>
     </fieldset>
 
-    <fieldset>
-      <legend>Selection</legend>
-      <div class="control-group">
-        <label for="selection-mechanism" class="control-label">Mechanism</label>
-        <div class="controls">
-          <select name="selection-mechanism" id="selection-mechanism" class="span3">
-            <option value="fp">Fitness Proportionate</option>
-            <option value="tournament">Tournament</value>
-          </select>
-          <span class="help-block">What mechanism should be used to select organisms to reproduce?</span>
-        </div>
-      </div>
-      <div class="control-group optional">
-        <label for="tournament-size" class="control-label">Tournament Size</label>
-        <div class="controls">
-          <input type="number" name="tournament-size" id="tournament-size" min="1" step="1" placeholder="10" value="10">
-          <span class="help-block">What number of organisms should be randomly chosen for each tournament?</span>
-        </div>
-      </div>
-      <div class="control-group">
-        <label for="selection-elitism" class="control-label">Elitism</label>
-        <div class="controls">
-          <div class="input-prepend">
-            <span class="add-on checkbox">
-              <input type="checkbox" id="selection-elitism-enabled" name="selection-elitism-enabled">
-            </span>
-            <input type="number" class="mini" name="selection-elitism" id="selection-elitism" min="0" max="100" step="0.1" placeholder="10.0" value="10.0" disabled>%
+    <fieldset class="accordian-group">
+      <legend class="accordian-heading">
+        <a href="#population-basics" class="accordian-toggle" data-toggle="collapse" data-parent="#creation-form-accordian">Population</a>
+      </legend>
+      <div class="accordian-body collapse" id="population-basics">
+        <div class="control-group">
+          <label for="population-size" class="control-label">Starting Population</label>
+          <div class="controls">
+            <input type="number" id="population-size" name="population-size" class="size span2" placeholder="20" value="20" min="2" max="250" step="1.0">
+            <span class="help-block">How many organisms should be seeded into the first generation?</span>
           </div>
-          <span class="help-block">What percentage of the most fit organisms in each generation should be directly cloned into the next generation?</span>
+        </div>
+
+        <div class="control-group">
+          <label for="fitness-function" class="control-label">Fitness Function</label>
+          <div class="controls">
+            <textarea id="fitness-function" name="fitness-function" rows="8" class="xxlarge"></textarea>
+            <span class="help-block">This should be a Javascript code block that returns the calculated fitness for a given organism. [<a href="#help/fitness">more</a>]</span>
+          </div>
         </div>
       </div>
     </fieldset>
-    <fieldset>
-      <legend>Crossover</legend>
-      <div class="control-group">
-        <label for="crossover-probability" class="control-label">Probability</label>
-        <div class="controls">
-          <input type="number" name="crossover-probabilty" id="crossover-probabilty" min="0" max="100" step="0.1" placeholder="70.0" value="70.0">%
-          <span class="help-block">For each pair of organisms selected to reproduce, what is the probability that a crossover will occur?</span>
+
+    <fieldset class="accordian-group">
+      <legend class="accordian-heading">
+        <a href="#chromosome-options" class="accordian-toggle" data-toggle="collapse" data-parent="#creation-form-accordian">Chromosome</a>
+      </legend>
+      <div class="accordian-body collapse" id="chromosome-options">
+
+        <div class="control-group">
+          <label for="chromosome-length" class="control-label">Length</label>
+          <div class="controls">
+            <input type="number" id="chromosome-length" name="chromosome-length" class="span2" placeholder="10" value="10" min="1" max="1000" step="1">
+            <span class="help-block">How many bases should each organism's chromosome have?</span>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label id="chromosome-bases" class="control-label">Bases</label>
+          <div class="controls">
+            <label class="radio">
+              <input type="radio" name="chromosome-bases" value="binary" checked="checked">
+              Binary - the chromosome will be a bitstring
+            </label>
+          </div>
         </div>
       </div>
     </fieldset>
-    <fieldset>
-      <legend>Mutation</legend>
-      <div class="control-group">
-        <label for="mutation-probability" class="control-label">Probability</label>
-        <div class="controls">
-          <input type="number" name="mutation-probability" id="mutation-probability" min="0" max="100" step="0.01" placeholder="0.1" value="0.1">%
-          <span class="help-block">For each base in a new organism's chromosome, what is the probability that a mutation to a different base will occur?</span>
+
+    <fieldset class="accordian-group">
+      <legend class="accordian-heading">
+        <a href="#selection-options" class="accordian-toggle" data-toggle="collapse" data-parent="#creation-form-accordian">Selection</a>
+      </legend>
+      <div class="accordian-body collapse" id="selection-options">
+        <div class="control-group">
+          <label for="selection-mechanism" class="control-label">Mechanism</label>
+          <div class="controls">
+            <select name="selection-mechanism" id="selection-mechanism" class="span3">
+              <option value="fp">Fitness Proportionate</option>
+              <option value="tournament">Tournament</value>
+            </select>
+            <span class="help-block">What mechanism should be used to select organisms to reproduce?</span>
+          </div>
+        </div>
+        <div class="control-group optional">
+          <label for="tournament-size" class="control-label">Tournament Size</label>
+          <div class="controls">
+            <input type="number" name="tournament-size" id="tournament-size" min="1" step="1" placeholder="10" value="10">
+            <span class="help-block">What number of organisms should be randomly chosen for each tournament?</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="selection-elitism" class="control-label">Elitism</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on checkbox">
+                <input type="checkbox" id="selection-elitism-enabled" name="selection-elitism-enabled">
+              </span>
+              <input type="number" class="mini" name="selection-elitism" id="selection-elitism" min="0" max="100" step="0.1" placeholder="10.0" value="10.0" disabled>%
+            </div>
+            <span class="help-block">What percentage of the most fit organisms in each generation should be directly cloned into the next generation?</span>
+          </div>
         </div>
       </div>
-      <div class="form-actions">
-        <input type="button" class="create btn btn-primary" value="Create">
+    </fieldset>
+
+    <fieldset class="accordian-group">
+      <legend class="accordian-heading">
+        <a href="#crossover-options" class="accordian-toggle" data-toggle="collapse" data-parent="#creation-form-accordian">Crossover</a>
+      </legend>
+      <div class="accordian-body collapse" id="crossover-options">
+        <div class="control-group">
+          <label for="crossover-probability" class="control-label">Probability</label>
+          <div class="controls">
+            <input type="number" name="crossover-probabilty" id="crossover-probabilty" min="0" max="100" step="0.1" placeholder="70.0" value="70.0">%
+            <span class="help-block">For each pair of organisms selected to reproduce, what is the probability that a crossover will occur?</span>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="accordian-group">
+      <legend class="accordian-heading">
+        <a href="#mutation-options" class="accordian-toggle" data-toggle="collapse" data-parent="#creation-form-accordian">Mutation</a>
+      </legend>
+      <div class="accordian-body collapse" id="mutation-options">
+        <div class="control-group">
+          <label for="mutation-probability" class="control-label">Probability</label>
+          <div class="controls">
+            <input type="number" name="mutation-probability" id="mutation-probability" min="0" max="100" step="0.01" placeholder="0.1" value="0.1">%
+            <span class="help-block">For each base in a new organism's chromosome, what is the probability that a mutation to a different base will occur?</span>
+          </div>
+        </div>
       </div>
     </fieldset>
 
     <fieldset>
-      <div class="control-group">
-        <label for="load-settings" class="control-label">Load Saved Settings...</label>
-        <div class="controls">
-          <select id="load-settings">
-            <option value=""></option>
-            <% existingSettings.each(function (model) { %>
-            <option value="<%= model.id %>"><%= model.get('name') %></option>
-            <% }) %>
-          </select>
-        </div>
-      </div>
       <div class="form-actions">
-        <input type="button" class="btn btn-small btn-primary load" value="Load">
+        <input type="button" class="create btn btn-primary" value="Create">
+        <select id="load-settings">
+          <option value="">Load saved settings...</option>
+          <% existingSettings.each(function (model) { %>
+          <option value="<%= model.id %>"><%= model.get('name') %></option>
+          <% }) %>
+        </select>
+        <input type="button" class="btn btn-small load" value="Load">
       </div>
     </fieldset>
   </form>

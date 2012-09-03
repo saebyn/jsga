@@ -25,6 +25,26 @@ footer {
   padding-top: 1em;
 }
 
+fieldset.accordian-group {
+  legend.accordian-heading a:after {
+    content: " ";
+    margin: 6px 8px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    .ie7-restore-right-whitespace();
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url("@{iconSpritePath}");
+    background-repeat: no-repeat;
+    background-position: -313px -119px;
+  }
+
+  .accordian-body {
+    padding-top: 8px;
+  }
+}
+
 .add-on.checkbox {
   margin-right: -4px;
 
@@ -92,4 +112,24 @@ form .optional {
 .chart .axis text {
   font-family: sans-serif;
   font-size: 11px;
+}
+
+.chart.matrix .background {
+  fill: @grayLighter;
+}
+
+.chart.matrix line {
+  stroke: @white;
+}
+
+.chart.matrix text {
+}
+
+.chart.matrix text.active {
+  fill: @red;
+}
+
+.histogram.chart rect {
+  fill: @blue;
+  stroke: @white;
 }

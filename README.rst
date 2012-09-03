@@ -30,6 +30,8 @@ Modernizr_ 2.0.6 (All core tests, html5shiv, yepnope, respond.js) -> source/java
 
 d3_ 2.9.4 -> source/javascripts/lib/d3.v2.js
 
+base64_ -> source/javascripts/lib/base64.js
+
 BDD spec dependencies
 +++++++++++++++++++++
 
@@ -55,3 +57,4 @@ Jasmine-sinon_ -> source/javascripts/lib/jasmine-sinon.js
 .. _Sinon.JS: http://sinonjs.org/
 .. _Jasmine: http://pivotal.github.com/jasmine/
 .. _d3: https://github.com/mbostock/d3
+.. _base64: http://code.google.com/p/javascriptbase64/

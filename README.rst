@@ -55,6 +55,6 @@ Jasmine-sinon_ -> source/javascripts/lib/jasmine-sinon.js
 .. _Jasmine-jQuery: https://github.com/velesin/jasmine-jquery
 .. _Jasmine-sinon: https://github.com/froots/jasmine-sinon
 .. _Sinon.JS: http://sinonjs.org/
-.. _Jasmine: http://pivotal.github.com/jasmine/
+.. _Jasmine: https://jasmine.github.io/
 .. _d3: https://github.com/mbostock/d3
 .. _base64: http://code.google.com/p/javascriptbase64/
